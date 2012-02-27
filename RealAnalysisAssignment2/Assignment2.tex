@@ -1,0 +1,203 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment 2}
+\author{Andrew Rickert}
+\date{Started: January 2, 2011 \\ \hspace{1pt} Ended: January ??, 2010}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We would like to show that the sentence $'\emptyset \subset A'$ is true where $A$ is any set. This is equivalent to the assertion that the empty set is the subset of any set. To this end we are to show that $x \in \emptyset$ implies $x \in A$. We know however that $x \in \emptyset$ is false for any $x$ therefore the sentence  $x \in \emptyset \implies x \in A$ is trivially true. This means that the sentence  $'\emptyset \subset A'$ is true.
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+To show that $||x| - |y|| \le |x - y|$ we need to show that both $|x| - |y| \le |x - y|$ and \\$-(|x| - |y|) = |y| - |x| \le |x - y|$ from the definition of the absolute value. We show the first as follows
+
+\begin{eqnarray*}
+|x| &=& |x - y + y| \\
+|x| &\le& |x - y| + |y| \quad \text{by the triangle inequality}
+\end{eqnarray*}
+so we have $|x| \le |x - y| + |y|$ which implies $|x| -|y| \le |x - y| $ which gives the first part of the theorem. Therefore we calculate as follows:
+
+For the second part we note that $|x| = |-x|$ from the definition of absolute value.
+
+\begin{eqnarray*}
+|y| &=& |y - x + x| \\
+|y| &\le& |y - x| + |x| \quad \text{by the triangle inequality} \\
+|y| &\le& |-(x - y)| + |x| \\
+|y| &\le& |x - y| + |x| \quad \text{from the definition of absolute value}
+\end{eqnarray*}
+so we have $|y| \le |x - y| + |x|$ which implies $|y| -|x|  = -(|x|-|y|) \le |x - y| $ which gives the second part of the theorem. 
+
+\newpage
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Part a) $M = \lbrace \frac{|x|}{1 + |x|} : x \in \mathbb{R} \rbrace $
+\vspace{10pt}
+
+We start by noting that $0 \le |x|$ also $|x| < |x| + 1$ so $0 \le |x| < |x| + 1 \implies 0 \le \frac{|x|}{1+ |x|}$. Since when $x = 0$ we also have $ \frac{|x|}{1+ |x|} = 0$ then inf $M$ = 0. 
+
+For the supremum we note that $|x| < |x| + 1 \implies \frac{|x|}{|x|+1} < 1$ that is, $M$ is bounded by 1. For any $\epsilon$ there exists $|x|$ such that $0 < \frac{1}{\epsilon} < |x|$ this implies that $\frac{1}{\epsilon} < |x| + 1$ so $\frac{1}{|x| + 1} < \epsilon$ but then $1 - \frac{1}{|x| + 1}  > 1 - \epsilon$ so we have $\frac{|x|}{|x| + 1}  > 1 - \epsilon$, which is to say any real less than 1 is not an upper bound for $M$. This means that sup $M$ = 1.
+
+\vspace{10pt}
+\noindent Part b) $M = \lbrace \frac{x}{1 + x} : x > -1 \rbrace $
+\vspace{10pt}
+
+Suppose that $x',x > -1$ in other words $x' + 1 > 0$ and $x + 1 > 0$. Now consider the difference in  two elements of $M$.
+\begin{eqnarray*}
+\frac{x'}{1 + x'} - \frac{x}{1 + x} &=& \frac{(1 + x)x' - (1 + x')x}{(1+x')(1 + x)}\\
+ 					      &=& \frac{x' - x}{(1+x')(1+x)}					  
+\end{eqnarray*}
+
+It is clear by the opening inequalities that the denominator is positive. If we assume that $x' > x$ then $x' - x > 0$ which shows that $\frac{x'}{1 + x'}  - \frac{x}{1 + x} > 0$. This means that $x' > x \implies \frac{x'}{1 + x'}  > \frac{x}{1 + x}$ which is to say that elements in $M$ increase for increasing $x$. By the arguments in part a then we see that sup $M$ = 1.
+
+\indent To show that the set is unbounded below we by using the density of the rationals to say that for any $N$ where $0 < N$ there exists an $x$ such that  $0 < x +1 < \frac{1}{1+N}$ where $x > -1$ by hypothesis. We now proceed with the following algebra
+
+\begin{eqnarray*}
+x +1&<& \frac{1}{1+N} \\
+x +1&<& 1 - \frac{N}{1+N} \\
+x&<&- \frac{N}{1+N} \\
+x+x N&<&-N \\
+x&<&-N -N x\\
+x&<&-N(1+ x)\\
+\frac{x}{1+x}&<&-N\\
+\end{eqnarray*}
+
+This says that for any $-N$ not matter how large there is an $x$ such that $\frac{x}{1+x}$ is less than this value. For $M$ to be bounded below would necessarily be a contradiction therefore inf $M$ = $-\infty$
+
+\vspace{10pt}
+\noindent Part c) $M = \lbrace x + \frac{1}{x} : \frac{1}{2} < x < 2 \rbrace $
+\vspace{10pt}
+
+To find the inf $M$ we note that $(\sqrt{x} - \frac{1}{\sqrt{x}})^2 \ge 0$ by the properties of squares in $\mathbb{R}$. This then implies that $x - 2 + \frac{1}{x} \ge 0 \implies x + \frac{1}{x} \ge 2$. This is to say that elements in $M$ are bounded below by 2. Since we have $x + \frac{1}{x} = 2$ for $x = 1$ then we must have inf $M$ = 2. 
+
+To find the supremum we perform the following calculation with the assumpion that $x' >x$:
+
+\begin{eqnarray*}
+x'+\frac{1}{x'} - (x + \frac{1}{x})&=&\frac{x'^2 + 1}{x'} - \frac{x^2+1}{x} \\
+					      &=&\frac{x (x'^2 + 1) - x'(x^2 + 1)}{x' x} \\
+					      &=&\frac{x x'^2 - x' x^2 - (x' - x)}{x' x} \\
+					      &=&\frac{x x'(x' -x)-(x' - x)}{x' x} \\
+					      &=&\frac{(x x' - 1)(x' - x)}{x' x}
+\end{eqnarray*}
+
+From the hypothesis that $\frac{1}{2} < x < 2$ and $x' > x$ it is clear that whether that final expression is positive or negative depends on the value of ($x' x - 1$). From the calculation it is clear then that $x'+\frac{1}{x'} > x + \frac{1}{x}$ if $x',x > 1$ and $x'+\frac{1}{x'} < x + \frac{1}{x}$ if $x',x < 1$. This means that we must decrease from a maximum at $x = \frac{1}{2}$ and rise to another maximum at $x = 2$. Since these two values are the same our supremum is \\sup $M$ = $\frac{5}{2}$.
+ 
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We can take the set $S = A \cap B \cap C$ to mean $S$ the set which has the properties of all three sets. First, this means that $S$ will only contain positive integers less or equal to 200. Second, of those 200 integers we only pick those that are expressed as a product of exactly three primes. Finally, because we require that the integer is not divisible by a square then none of the three prime numbers can be equal. Our set $S$ is then the collection of integers less than 200 which are expressed as the product of three different primes.
+
+The lowest two primes are 2 and 3, therefore the highest prime that we can use to produce an integer less than 200 is 31. We then proceed by picking the next lowest prime and finding all the distinct prime triples that keep the product under 200. This is easy since we only check (2,3,29) and (2,5,29) to see that (2,3,29) is the only possible prime triple that has a produce less than 200 . We proceed in this manner incrementally checking the small set of possible triples to produce the following set of values.
+\vspace{10pt}
+
+\begin{tabular}{c c c}
+(2,3,31) & (2,3,11) & (2,5,7)\\
+(2,3,29) & (2,5,11) & (3,5,7)\\
+(2,3,23) & (3,5,11)& (2,3,5)\\
+(2,3,19) & (2,7,11) & \\
+(2,5,19) & (2,3,9) & \\
+(2,3,17) & (2,5,9) & \\
+(2,5,17) & (3,5,9) & \\
+(2,3,13) & (2,7,9) & \\
+(2,5,13) & (3,7,9) & \\
+(3,5,13) & (2,3,7) & \\
+\end{tabular}
+
+\vspace{10pt}
+Prime decompositions are unique which allows us to translate the table above into an explicit definition of S:
+\[
+S = \{ 30,42,54,66, 70,78,90,102,105,110,114,126,130,135,138,154,165,170,174,186,189,190,195 \}
+\]
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are being asked to show that there is a 1-1 correspondence $g$ such that $g: Z \to \mathbb{R}$. Since $X \backsim \mathbb{R}$ and $Y \backsim \mathbb{N}$ and $X \cap Y = \emptyset$ we can define a function $f$ such that $f : X \to \mathbb{R}$ and $g: Y \to \mathbb{N}$ such that $dom \; f \cap dom \; g = \emptyset$. Now we define the function $j$ such that  $\{j(x) | j(x) = f(x)$ for $x \in X$ and $j(x) = g(x)$ for $x \in Y \} $. Suppose that there is a 1-1 correspondence $h: \mathbb{R}\cup\mathbb{N} \to \mathbb{R}$. We form the composite function $hj$ which will give the following
+\begin{eqnarray*}
+hj(Z) &=& hj(X \cup Y) = h(j(X) \cup j(Y)) \\
+         &=& h(\mathbb{R} \cup \mathbb{N})\\
+         &=& \mathbb{R}
+\end{eqnarray*}
+Since the function $j$ is given, being derived from the 1-1 correspondences between $X$, $Y$ and $\mathbb{R}$, $\mathbb{N}$ respectively we need only to find the function $h$, the 1-1 correspondence between $\mathbb{R} \cup \mathbb{N}$ and $\mathbb{R}$. Once found then $g = hj$ will be our 1-1 correspondence between $Z$ and $\mathbb{R}$.
+
+Let $h: \mathbb{R} \cup \mathbb{N} \to \mathbb{R}$ be defined as follows:\\
+\begin{eqnarray*}
+h(x) &=& x \hspace{35pt} \text{for} \; x \in \mathbb{R} \backslash \mathbb{N} \\
+h(x) &=& 2 x \hspace{29pt} \text{for} \; x \in \mathbb{N} \subset \mathbb{R} \\
+h(x) &=& 2 x +1 \hspace{10pt} \text{for} \; x \in \mathbb{N}
+\end{eqnarray*}
+
+The first two lines in the description of the function cover the mapping from $\mathbb{R}$ while the last line covers $\mathbb{N}$. The functions in all are 1-1 and since $(\mathbb{R} \backslash \mathbb{N} \cup \mathbb{N}) \cup \mathbb{N} = \mathbb{R} \cup \mathbb{N}$ then $h$ is the required function.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Part a) For the first part we need to find a set that has three limit points,. If we let $A_1 = \{-1 + \frac{1}{n} \}$, $A_2 = \{0 + \frac{1}{n} \}$, $A_3 = \{1 + \frac{1}{n} \}$ with $n \in \mathbb{N}$ it is clear that the limit points of these sets are \{-1,0,1\} respectively. Lastly we should show that $A = A_1 \cup A_2 \cup A_3$ has no other limit points. Because we know that $\overline{A} \cup \overline{B} = \overline{A \cup B}$ and by extension that $\overline{A} \cup \overline{B} \cup \overline{C} = \overline{A \cup B \cup C}$ we know that there is no limit point in $A$ that is not in $A_1$,$A_2$, or $A_3$ for otherwise  $\overline{A} \cup \overline{B} \cup \overline{C} \nsupseteq \overline{A \cup B \cup C}$.
+ 
+\vspace{10pt}
+\noindent Part b) Consider the set $A = \{ \frac{1}{n} +  \frac{1}{m} | \; n, m \in \mathbb{N} \}$. For $n = n'$ held constant it is clear that we have a subset of $A$ such that its limit point is $\frac{1}{n'}$. This is true for any value of $n$ so there is a 1-1 correspondence between these limit points and $\mathbb{N}$ through the function $f(\frac{1}{n'}) = n'$ for each $n' \in \mathbb{N}$. This shows that there is at least a countable number of limit points in $A$. If we can show that these are the only limit points then we will have shown there is a bounded set with a countable number of limit points. \\
+\indent Since $\frac{1}{n} + \frac{1}{m} > 0 $ for all $n$ and $m$ there is no limit point less than 0. Now suppose that $n,m \ge 2$ then $\frac{1}{n} + \frac{1}{m} \le 1$. In this case there can be no limit point greater than 1 for there must be a neighborhood around such a limit point $x$ such that $1 < x - \epsilon$ but since $\frac{1}{n} + \frac{1}{m} \le 1$ there are no points in the neighborhood which contradicts there being a limit point greater than 1. So, we must have either $n = 1$ or $m = 1$,  in either case the limit is 1, therefore their are no limits greater than one. We must now show that there are no limit points in the intervals $(\frac{1}{n},\frac{1}{n-1})$.\\
+\indent Let $M = \{ (n,m) \; | \; n,m \in \mathbb{N} \}$,  now suppose there is limit point $x \in (\frac{1}{n},\frac{1}{n-1})$.
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+
+\noindent Part a) \\
+\indent In order to show that $E^{\circ}$ is open we need to show that each point of $E^{\circ}$ is itself an interior point. Consider $x \in E^{\circ}$, by definition this means that there is a neighborhood $N$ around $x$  such that $N_r(x) \subset E$. Let's pick a $y \in N_r(x)$ and let $d(x,y) = d$, then the neighborhood $N_{r-d}(y)Ê\subset N_r(x)$. This is so because if $z \in N_{r-d}(y)$ then $d(z,y) < r - d$ but $d(y,x) = d$ so $d(z,x) \le d(z,y) + d(y,x) = r - d + d \implies d(z,x) < r$ then $z \in N_r(x)$. This shows that if $x \in E^{\circ}$ and $y \in N_r(x)$ then there is a neighborhood $N_q(y)$ such that $N_q(y) \subset N_r(x) \subset E$, in other words $y$ is also an interior point ($y \in E^{\circ}$). This shows then that $N_r(x) \subset E^{\circ}$, so $E^{\circ}$ is open.\\
+
+\noindent Part b) \\
+\indent The first part of the 'if and only if', that is the part of theorem that says $E^{\circ} = E \implies E$ is open is shown by part a since $E^{\circ}$ is open. The second part of the 'if and only if' is $E$ is open $\implies E^{\circ} = E$. From the definition of $E^{\circ}$ if $x \in E^{\circ}$ then $x \in E$ so $E^{\circ} \subset E$. Suppose that $x \in E$ then since $E$ is open there is a neighborhood $N(x) \subset E$ this means however that $x \in E^{\circ}$ so $E \subset E^{\circ}$ therefore $E^{\circ} = E$.\\
+
+\noindent Part c) \\
+\indent Because $G$ is open we know that $\exists x \in G$ such that $N(x) \subset G$, where $N(x)$ is a neighborhood. Since $G \subset E$ then we have $N(x) \subset E$ this implies that $x \in E^{\circ}$ therefore $G \subset E^{\circ}$
+
+\end{document}  

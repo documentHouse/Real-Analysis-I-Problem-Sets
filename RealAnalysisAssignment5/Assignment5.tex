@@ -1,0 +1,92 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment 5}
+\author{Andrew Rickert}
+\date{Started: April 20, 2011 \\ \hspace{1pt} Ended: April ??  2011}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+First we show that $X$ being closed implies completeness. Since a Cauchy sequence in $X$ is a Cauchy sequence in $M$ where $X$ is a subset and $M$ is complete we know that the sequence converges. Since the sequence consists of points of $X$ then every neighborhood of the point of convergence contains elements of $X$, that is it is a limit point. Because $X$ is closed it contains the limit point so every Cauchy sequence in $X$ converges to a point in $X$ and so the set is complete.\\
+\indent For the inverse we need to show that if $X$ is complete then $X$ is closed. Consider a limit point $x \in X$. By the definition of a limit point there is $p_1 \in X$ such that $d(p_1,x) < \frac{1}{2}$. Similarly we may find a $p_2 \in X$ such that $d(p_2,x) < \frac{1}{4}$ and so on. In this way we produce a sequence in $X$ such that $d(p_n,x) < \frac{1}{2^n}$. This sequence converges to a point $p$. Since every convergent sequence is a Cauchy sequence by a theorem in Rudin and $X$ is complete the point of convergence must be in $X$ so $p \in X$ and $X$ is closed.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+Part a) We need to show that if $(x_{2n})$ and $(x_{2n-1})$ both converge to the same limit then $(x_n)$ converges and vice versa. Concluding that $(x_{2n})$ and $(x_{2n-1})$ converge when $(x_n)$ follows from the fact that every subsequence of convergent series converges to the same limit. The other conclusion that $(x_n)$ converges if $(x_{2n})$ and $(x_{2n-1})$ do goes as follows.\\
+\indent Since $(x_{2n})$ converges there exists an $N_1$ such that for given $\epsilon$ we have $|x_{2n}-x'| < \epsilon$ for $n > N_1$ where $x'$ is the limit. Similarly for $(x_{2n-1})$ we have $N_2$ such that  $|x_{2n-1}-x'| < \epsilon$ for $n > N_2$. If we take $N = \text{max} (2N_1,2N_2)$ then for $n > N$ we have $|x_n -x'| < \epsilon$ since either $x_n = x_{2n'}$ or $x_n = x_{2n'-1}$ for some $n'$. This shows that $(x_n)$ converges by virtue of the convergence of $(x_{2n})$ and $(x_{2n-1})$ 
+
+Part b) Now we need to show that $(x_n)$ converges if $(x_{2n})$,$(x_{2n-1})$, and $(x_{5n})$ all converge. We suppose that $\lim_{n \to \infty}(x_{2n}) = \alpha$ and, $\lim_{n \to \infty}(x_{2n-1}) = \beta$ and $\alpha \neq \beta$. \\
+\indent There is a subsequence of $(x_{5n})$ that is a subsequence of $(x_{2n})$ since if $n = 2k$ we have $5n = 5(2k) = 2(5k) = 2j$ where $j = 2k$. So for even $n$, then subsequence of $(x_{5n})$ is a subsequence of $(x_{2n})$.
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Extra Problem \\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\end{document}  

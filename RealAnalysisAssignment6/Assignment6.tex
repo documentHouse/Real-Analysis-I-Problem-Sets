@@ -1,0 +1,204 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment 6}
+\author{Andrew Rickert}
+\date{Started: April 29, 2011 \\ \hspace{1pt} Ended: May 4,  2011}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We need to that the convergence of the series with terms $|a_n|^2$ follows from the convergence of the series with terms $|a_n|$. The terms $|a_n|^2$ are positive be virtue of the absolute value which means that the series is a monotonically increasing sequence. If can show that $\sum |a_n|^2$ is bounded that we will have shown the convergence of the series.\\
+\indent From the convergence of the $\sum |a_n|$ we know that a theorem of rudin says that $\lim_{n \to \infty} |a_n| \to 0$. So, for all $\epsilon$ there exists an $N$ such that $|a_n| < \epsilon$ for $n > N$.\\
+\indent Lets choose $\epsilon = 1$ so there is an $N$ such that $|a_n| < 1$ for $n > N$. This gives $|a_n|^2 < |a_n|$ for $n > N$. Since $\sum |a_n|$ converges it is bounded by a real $M$ so we have 
+\[ \sum_{n = N+1}^\infty |a_n|^2 < \sum_{n = N +1}^\infty |a_n| < M \]
+Now let $M' = \text{max} \{ |a_1|^2, |a_2|^2, \cdots, |a_N|^2 \}$ then we have 
+\[ \sum_{n = 1}^\infty |a_n|^2 = \sum_{n = 1}^N |a_n|^2 + \sum_{n = N+1}^\infty |a_n|^2 < M' + M \]
+this shows the series is bounded and therefore converges.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We need to carryout the sum \[ \sum_{n =1}^\infty \frac{1}{n(n+1)(n+2)} \]
+We proceed first by using the following trick. Assume two undetermined constants $A$ and $B$ and start with the following equation:
+\begin{equation} 
+\frac{1}{n(n+2)} = \frac{A}{n} + \frac{B}{n+2} \label{eqn:breakupalgebra}
+\end{equation}
+We manipulate previous equation into the following
+\[ 1 = A(n+2) + B n \]
+Substituting first $n = 0$ then $n = 2$ gives the following equations
+\begin{eqnarray*}
+1 &=& 2 A \\
+1 &=& -2 B 
+\end{eqnarray*}
+Solving these equations allows us to determine the form of (\ref{eqn:breakupalgebra}) as
+\begin{equation}
+\frac{1}{n(n+2)} = \frac{1}{2n} - \frac{1}{2(n+2)} \label{eqn:firstbreakup}
+\end{equation}
+
+If we now multiply (\ref{eqn:firstbreakup}) by $\frac{1}{n+1}$ we get 
+\[ \frac{1}{n(n+1)(n+2)} = \frac{1}{2n(n+1)} - \frac{1}{2(n+1)(n+2)} \]
+
+If we now use the same trick as above on the fractions $\frac{1}{n(n+1)}$ and $\frac{1}{(n+1)(n+2)}$ we get the following expression:
+
+\begin{equation}
+ \frac{1}{n(n+1)(n+2)} = \frac{1}{2}(\frac{1}{n} - \frac{1}{n+1}) - \frac{1}{2}(\frac{1}{n+1} - \frac{1}{n+2}) \label{eqn:fullbreakup}
+\end{equation}
+
+As an aside we note that if $a_n = b_n - b_{n+1}$ then it is clear from induction that $\sum_{i = 1}^n a_n = b_1 - b_n$. Further, if $\lim_{n \to \infty}b_n \to 0$ then $\sum_{n = 1}^\infty a_n = b_1$. From the form of equation (\ref{eqn:fullbreakup}) we have $b_n = \frac{1}{n}$ in the first case and $b_n = \frac{1}{n+1}$ in the second case, since both of these sequences limit to zero we have the following 
+
+\begin{eqnarray*}
+\sum_{n =1}^\infty \frac{1}{n(n+1)(n+2)} &=& \sum_{n =1}^\infty \frac{1}{2}(\frac{1}{n} - \frac{1}{n+1}) - \sum_{n =1}^\infty \frac{1}{2}(\frac{1}{n+1} - \frac{1}{n+2}) \\
+                  & = & \frac{1}{2} - \frac{1}{4} = \frac{1}{4}
+\end{eqnarray*}
+
+Summing each telescoping sequence individually is justified by the fact that each telescoping sequence is such that $a_n < \frac{1}{n^2}$ which means that the sequence is absolutely convergent and so can be rearranged into the sums above.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+In each of the following three parts we need to show whether the $\sum a_n$ converges or diverges.\\
+
+\noindent Part a) $a_n = \sqrt{n+1} - \sqrt{n}$\\
+\indent There are at least two ways to show that this sequence converges. First we note that the sequence is a telescoping series so
+\[ \sum_{k=1}^n \sqrt{k+1} - \sqrt{k} =  \sqrt{n} - 1\]
+Since $\lim_{k \to \infty} \sqrt{k} = \infty$ the sequence diverges. \\
+\indent Another proof goes as follows, consider the following calculation
+\begin{equation}
+a_n = \sqrt{n+1}-\sqrt{n} = \frac{\sqrt{n+1}-\sqrt{n}}{1} \frac{\sqrt{n+1} + \sqrt{n}}{\sqrt{n+1} + \sqrt{n}} = \frac{n+1 - n}{\sqrt{n+1} + \sqrt{n}} = \frac{1}{\sqrt{n+1} + \sqrt{n}} \nonumber
+\end{equation}
+
+\begin{equation}
+\frac{1}{\sqrt{n+1} + \sqrt{n}} > \frac{1}{\sqrt{n+1} + \sqrt{n+1}} > \frac{1}{2 \sqrt{n+1}} \nonumber
+\end{equation}
+
+The question comes down to the divergence of $\sum_{n = 1}^\infty \frac{1}{2 \sqrt{n+1}}$ if we let $n' = n+1$ then showing the divergence of $\sum_{n'=1}^\infty \frac{1}{\sqrt{n'}}$ will show the divergence of the former sequence which is a lower bound for our original sequence.\\
+\indent So assume $1 \le n$ then we derive the following \[ 1 \le n \implies n \le n^2 \implies \sqrt{n} \le n \implies \frac{1}{n} \le \frac{1}{\sqrt{n}} \]
+ Since $\sum \frac{1}{n}$ is known to diverge the above inequality shows that $\sum \frac{1}{\sqrt{n}}$ diverges as well which shows the result.
+
+Part b) $a_n = \frac{\sqrt{n+1} - \sqrt{n}}{n}$\\
+If we carry out a calculation similar to the previous part we derive the following:\\
+\begin{equation}
+a_n = \frac{\sqrt{n+1}-\sqrt{n}}{n} = \frac{\sqrt{n+1}-\sqrt{n}}{n} \frac{\sqrt{n+1} + \sqrt{n}}{\sqrt{n+1} + \sqrt{n}} = \frac{n+1 - n}{n(\sqrt{n+1} + \sqrt{n})} = \frac{1}{n(\sqrt{n+1} + \sqrt{n})} \nonumber
+\end{equation}
+\begin{equation}
+\implies \frac{1}{n(\sqrt{n+1} + \sqrt{n})}  <   \frac{1}{n(\sqrt{n} + \sqrt{n})} =  \frac{1}{2n\sqrt{n}}= \frac{1}{2n^{\frac{3}{2}}} \nonumber
+\end{equation}
+This calculation shows that the $(a_n)$ is a sequence of positive terms that is bounded above by the sequence $\sum 1/n^{\frac{3}{2}}$. By a theorem in Rudin (3.28) a series of the form $\sum 1/n^p$ converges if $1 < p$ since $p = \frac{3}{2}$ for our series we have 
+\[  \sum \frac{\sqrt{n+1} - \sqrt{n}}{n} <  \sum \frac{1}{2 n^{\frac{3}{2}}} = M \]
+Thus the series is monotone and bounded and therefore converges.\\
+
+Part c) $a_n = \frac{1}{1+\alpha^n}$ for fixed $\alpha > 0$\\
+The series based on this sequence converges depend on the value of $\alpha$. If $\alpha = 1$ then the series is of the form $\sum_{n = 1}^\infty \frac{1}{2}$ which diverges since the terms do not go to 0. Furthermore, if $\alpha < 1$ then by induction we have $\alpha^n < 1$ so 
+\[ \alpha^n < 1 \implies 1+ \alpha^n < 2 \implies \frac{1}{2} < \frac{1}{1+\alpha^n} \]
+Which shows once again that the terms do not go to zero. We have show that if $a \le 1$ than the sequence diverges. \\
+\indent Now assume that $\alpha > 1$. From the relation $0 < 1$ we derive \[ 0 < 1 \implies \alpha^n < 1+ \alpha^n \implies \frac{1}{1+\alpha^n} < \frac{1}{\alpha^n} \]
+Since all of the terms in the series are positive we will have shown the convergence of the series if we can show that $1/ \alpha^n$ converges since this will provide a bound for $\sum a_n$. Appliying the root test gives
+\[ \lim_{n \to \infty} \sqrt[n]{\frac{1}{\alpha^n}} = \lim_{n \to \infty} \frac{1}{ \sqrt[n]{\alpha^n} } =  \lim_{n \to \infty} \frac{1}{\alpha} =  \frac{1}{\alpha} < 1 \]
+So the bounding sequence converges which provides the bound for $\sum a_n$.
+
+
+\newpage
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We need to show that the convergence of $\sum a_n$ implies the convergence $\sum \frac{\sqrt{a_n}}{n}$ given that $a_n \ge 0$. We can use the Cauchy-Schwarz inequality for series which comes from Rudin:
+\begin{equation}
+|\sum_i^n x_i y_i|^2 \le \sum_j^n | x_j |^2 \sum_k^n | y_k |^2 \label{eqn:seriescs}
+\end{equation}
+
+\noindent We also note that if $1 \le n$ we have $n \le n^2 \implies \sqrt{n} \le n \implies \frac{1}{n} \le \frac{1}{\sqrt{n}} $.
+
+\noindent Using equation (\ref{eqn:seriescs}) and letting $x_i = \sqrt{a_i}$ and $y_i = 1$ we derive the following:
+\[  | \sum_i^n \sqrt{a_i} |^2   = \sum_j^n | \sqrt{a_j} |^2 \sum_n^k | 1 |^2  = (\sum_j^n a_j)(n)  \]
+This allows us to derive
+\begin{eqnarray*}
+ \frac{1}{n} | \sum_i^n \sqrt{a_i} |^2  &=& \sum_j^n a_j \\
+ \implies  | \sum_i^n \frac{\sqrt{a_i}}{\sqrt{n}} |^2  &=& \sum_j^n a_j \\
+ \implies \sum_j^n a_j &=& | \sum_i^n \frac{\sqrt{a_i}}{\sqrt{n}} |^2  \ge  | \sum_i^n \frac{\sqrt{a_i}}{n} |^2 \\
+ \implies \sqrt{\sum_j^n a_j} &\ge& \sum_i^n \frac{\sqrt{a_i}}{n}
+\end{eqnarray*}
+
+\noindent Since $\sum_j a_j$ converges it provides a bound on $\sum_i \frac{\sqrt{a_i}}{n}$. Since the terms of the series are positive it is monotone increasing and since it is bounded the series must converge.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We need to show that if $\sum a_n$ converges then we also have $\lim_{n \to \infty} na_n = 0$. First we derive an important inequality. Since $a_1 \ge a_2 \ge ...$ we have 
+\[ \sum_{k = m}^n a_k \ge \sum_{k = m}^n a_n = (n-m+1)a_n \] 
+If we now let $n = 2n$ and  $m = n+1$ we have 
+\begin{equation}
+ \sum_{k = n+1}^{2n} a_k \ge (2n - (n+1) + 1)a_{2n} =  na_{2n} \label{eqn:convinequality}
+\end{equation}
+
+ Because $\sum a_n$ converges the series satisfies the cauchy convergence criterion. So, for $\epsilon$ there is an $N$ such that for $m,n > N$ 
+\[ |\sum_m^n a_n| < \epsilon \]
+If we let $m = 2n$ and since $n >N$ we have $n+1 > N$ so  
+\[ |\sum_{n+1}^{2n} a_n| < \epsilon \]
+By the inequality in equation $(\ref{eqn:convinequality})$ we have for $n > N$
+
+\[ |na_n| <  |\sum_{n+1}^{2n} a_n| < \epsilon \]
+
+\noindent This shows that $\lim_{n \to \infty} na_n = 0$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+To show that $\lim_{h \to 0} |f(x+h) - f(x-h)| = 0$ does not imply continuity we pick a function with a removable discontinuity.\\
+\indent Let $f = x$ for $x \neq 0$ and $f = 1$ for $x = 0$. At a given $x$ we have $|f(x+h) - f(x-h)| = |x+h - (x-h)| = |2h|$ and $\lim_{h \to 0} |h| = 0$ so our function satisfies the hypothesis of the theorem. Continuity requires that $\lim_{x \to 0}f(x) = f(0)$ and since $\lim_{x \to 0}f(x)  = 0 \neq 1 = f(0)$ the function is not continuous which provides the counterexample.
+
+
+%\vspace{15pt}
+%\begin{flushleft} 
+%\textbf{Class 18.100B} - Extra Problem 1\\
+%\rule{500pt}{1pt}\\
+%\end{flushleft} 
+
+
+\end{document}  

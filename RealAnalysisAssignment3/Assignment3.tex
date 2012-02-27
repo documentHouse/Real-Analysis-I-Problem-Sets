@@ -1,0 +1,166 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment 3}
+\author{Andrew Rickert}
+\date{Started: March 13, 2011 \\ \hspace{1pt} Ended: March ??  2010}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We need to show how the norm can define a metric on $\mathbb{R}$. Suppose we are given the definition of the norm as in the problem. We define the metric to based on the norm as $d(p,q) \equiv \|p-q\|$.\\
+\indent We know need to verify that the metric defined in this way satisfies the axioms for a metric.
+First we need to show that 
+\begin{equation}
+d(p,q) > 0 \; \text{if} \; p \neq q \; \text{and} \; d(p,p) = 0 \label{rule1}
+\end{equation} 
+From rule i) for the norm we know that $d(p,q) = \|p-q\| \ge 0$,  since also we have that $\|x\| = 0 \iff x = 0$ we know that $p-q \ne 0 \implies \|p-q\| \neq 0$. So, if $p \neq q$ then $d(p,q) \neq 0$ which shows $d(p,q) > 0$ and completes the first part of (\ref{rule1}). From the definition of the metric we have $d(p,p) = \|p - p\| = \| 0 \| = 0$ again by rule (i). The completes the second part of (\ref{rule1}).\\
+\indent Next we have to show that 
+\begin{equation}
+d(p,q) = d(q,p) \label{rule2}
+\end{equation} 
+According to rule (ii) it is true that $\| \lambda x \| = |\lambda| \|x \|$. We perform the following calculation.
+\begin{eqnarray*}
+d(p,q) & = & \| p - q \| \\
+            & = & \| (-1) (q - p) \| \\
+            & = & |-1| \|q - p\| \; \text{by rule (ii)} \\
+            & = & \| q - p \| = d(q,p)
+\end{eqnarray*}
+We are given rule (iii) as $\| x+ y \| =  \| x \|  +  \| y \|$. The calculation to verify that $d(p,q) \le d(p,r) + d(r,q)$ goes as follows:
+\begin{eqnarray*}
+d(p,q) & = & \| p - q \| \\
+	  & = & \| p - r + r - q \| \\
+	  & = & \| p - r \| + \| r - q \| \; \text{by rule (iii)} \\
+	  & = & d(p,r) + d(r,q)
+\end{eqnarray*}
+This verifies all of the properties of the metric based on the norm defined in the problem.
+
+\newpage
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+In order to show that $d_1(x,y) = \frac{d(x,y)}{1 + d(x,y)}$ is a metric, given that $d(x,y)$ is, we will use the definition of $d_1(x,y)$ to show the three properties of the metric are satisfied.\\
+\indent First we need to $d_1(x,y) > 0$ if $x \neq y$ and $d(x,x) = 0$ otherwise. Now since $d(x,y) > 0$ if $x \neq y$ then $1 + d(x,y) > 1 > 0$ so $1+ d(x,y) > 0$ therefore we have $\frac{d(x,y)}{1 + d(x,y)} > 0$ by the field axioms. Also, because $d(x,x) = 0$ by definition, $d_1(x,x) = \frac{d(x,y)}{1 + d(x,y)} = \frac{0}{1 + 0} = 0$.\\
+\indent Next we show that $d_1(x,y)$ is symmetric. This is clear from the following calculation
+\begin{eqnarray*}
+d_1(x,y) & = & \frac{d(x,y)}{1 + d(x,y)} \\
+	      & = & \frac{d(y,x)}{1 + d(y,x)} \quad \text{By the symmetry of $d(x,y)$} \\
+	      & = & d_1(y,x)
+\end{eqnarray*}
+Finally we need to show that $d_1(x,y)$ satisfies the triangle inequality. From the definition of the metric $d$ we have that $d(x,z) \le d(x,y) + d(y,z)$ and similarly $1+ d(x,z) \le 1+ d(x,y) + d(y,z)$. Because $d(p,q) > 0$ for all $p, q$we can divide the first expression by second to get\\
+\begin{eqnarray}
+d_1(x,y) & = & \frac{d(x,y)}{1 + d(x,y)} \le \frac{d(x,y)+ d(y,z)}{1+ d(x,y) + d(y,z)} \nonumber \\ 
+	      & = & \frac{d(x,y)}{1+ d(x,y) + d(y,z)} + \frac{d(y,z)}{1+ d(x,y) + d(y,z)} \label{largeTriangle}
+\end{eqnarray}
+Now both $0 \le d(x,y)$ and $0 \le d(y,z)$ from the definition of $d(p,q)$ so we have in the first instance  $0 \le d(x,y) \implies 1 + d(y,z) \le 1 + d(x,y) + d(y,z) \implies \frac{1}{1 + d(x,y) + d(y,z)} \le \frac{1}{1 + d(y,z)}$ and by a similar calculation we have $ \frac{1}{1 + d(x,y) + d(y,z)} \le \frac{1}{1 + d(x,y)}$. Using these expressions in (\ref{largeTriangle}) we get the following 
+\begin{eqnarray*}
+d_1(x,y) & \le & \frac{d(x,y)}{1+ d(x,y) + d(y,z)} + \frac{d(y,z)}{1+ d(x,y) + d(y,z)}  \\
+	      & \le  &  \frac{d(x,y)}{1+ d(x,y)} +  \frac{d(y,z)}{1+ d(y,z)} \\
+	      & = & d_1(x,y) + d_1(y,z)
+\end{eqnarray*}
+This completes the demonstration of the third property of the metric.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Part a) Show $A^\circ \cup B^\circ \subset (A \cup B)^\circ$ \\ \newline
+\indent Assume that $x \in A^\circ \cup B^\circ$, this means either $x \in A^\circ$ or $x \in B^\circ$. Suppose that $x \in A^\circ$, then there is a neighborhood containing $N(x)$ such that $N(x) \subset A$ by the definition of $A^\circ$. This means that also $N(x) \subset A \cup B$, that is to say $x \in (A \cup B)^\circ$. The conclusion for the case where $x \in B^\circ$ is similar we have therefore that $A^\circ \cup B^\circ \subset (A \cup B)^\circ$. \newline
+
+\newpage
+ \noindent Part b) Show $A^\circ \cap B^\circ = (A \cap B)^\circ$ \\ \newline
+ \indent Assume that $x \in A^\circ \cap B^\circ$ then $x \in A^\circ$ and $x \in B^\circ$. From the definition of the interior we have a neighborhood around x in A, $N_{\delta_1}(x) \subset A$ and a neighborhood around x in B, $N_{\delta_2}(x) \subset B$. Since the intersection of two open sets is open and $x \in N_{\delta_1}(x) \cap N_{\delta_2}(x)$ there must be a neighborhood of x in the intersection so $N_\delta(x) \subset N_{\delta_1}(x) \cap N_{\delta_2}(x)$ where $\delta \le \delta_1$ and $\delta \le \delta_2$. This shows that $N_\delta(x) \subset A \cap B$ which is to say that $x \in (A \cap B)^\circ$. Thus $x \in A^\circ \cap B^\circ \subset (A \cap B)^\circ$.\\
+\indent Now assume that $x \in (A \cap B)^\circ$. This means there is a neighborhood around x, $N(x)$, such that $N(x) \subset A \cap B$. This means that $N(x) \subset A$ and $N(x) \subset B$,  which by the definition of the interior means $x \in A^\circ$ and $x \in B^\circ$ therefore $x \in A^\circ \cap B^\circ$. Thus, $x \in (A \cap B)^\circ \subset A^\circ \cap B^\circ$ and we have the result.
+ 
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Part a) $\partial A = \overline{A} \cap \overline{A^c}$ \\ \newline
+\indent Suppose $x \in \partial A$, then by definition every neighborhood contains an element of $A$ and $A^c$. This means that x is also a limit point of $A$ and $A^c$ so we have $x \in \overline{A}$ and $x \in \overline{A^c}$. So we have $x \in A \cap A^c$ therefore $\partial A \subset \overline{A} \cap \overline{A^c}$.\\
+\indent Now suppose that $x \in \overline{A} \cap \overline{A^c}$. This means that x is a limit point of both $A$ and $A^c$. By the definition of the limit point this means that every neighborhood of x contains a point of $A$ and $A^c$ which is to say that $x \in \partial A$. \newline
+
+\noindent Part b) Show $p \in \partial A \iff p$ is in $\overline{A}$ and not in $A^\circ$ \\ \newline
+\indent $p \in \partial A$ if every neighborhood of $p$ intersects both $A$ and $A^c$. Since every neighborhood intersects $A$, $p$ is a limit point and so is in $\overline{A}$ but, because every neighborhood intersects $A^c$ there is no neighborhood of $p$ contained in $A$. This means that
+$p$ is not in $A^\circ$. \\ 
+\indent For the other part of the conclusion we not that if $p$ is in $\overline{A}$ then $p$ is a limit point of $A$. This means that every neighborhood of $p$ intersects $A$. Since $p$ is not in the interior of $A$ there is no neighborhood of $p$ contained in $A$. This says that every neighborhood must contain points not in $A$, which is to say points in $A^c$. Since every neighborhood contains  elements of $A$ and $A^c$ we have that $p \in \partial A$.\\ \newline
+\noindent Part c) Show $\partial A$ is closed. \\ \newline
+\indent By part a, $\partial A = \overline{A} \cap \overline{A^c}$. By a theorem of rudin the closure of a set is closed. So $\partial A$ is the intersection of two closed sets. By another theorem of rudin, the intersection of two or more closed sets is closed thus $\partial A$ is closed. \newline
+
+\noindent Part d) Show, $A$ is closed $\iff \partial A \subset A$ \\
+
+By part (b) we have $p \in \partial A \implies p$ is in $\overline{A}$ and $p \notin A^\circ$. By a theorem of rudin, if $A$ is closed we have $A = \overline{A}$. Thus $p \in \overline{A} = A$ which establishes the first part of the theorem.\\ 
+\indent Let $p$ be a limit point of $A$. Either there is a neighborhood of p that is contained in $A$ or there isn't. If there is then this a limit point of $A$ since larger neighborhoods will contain this neighborhood and any smaller ones will be contained by the neighborhood. Thus, there is always an intersection between $A$ and a neighborhood of $p$ in this case. Suppose then that there is not containment. This means that every neighborhood must contain elements of $A^c$ which is to say that $p \in \partial A$. Since $p \in \partial A \subset A$ we have containment of the two kinds of limit points. Since A then contains all of its limit points it is closed.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+For the first part of the problem we need to show that the closure of the open ball is the closed ball. First we note that by the definition of the closure $B_r(x) \subset \overline{B_r(x)}$, where $B_r(x) = \{ y \; | \; d(x,y) < r\}$. So we need to show that the limit points of $B_r(x)$ along with $B_r(x)$ itself are the closed ball.  
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We need to show that the set $K = \{ 0,1,\frac{1}{2}, \frac{1}{3}, \ldots, \frac{1}{n}, \ldots \}$ is compact using the definition. Suppose $U_\alpha$, a collection of open sets, is a cover of $K$. For some $\alpha_1$ we have 0 $\in U_{\alpha_1}$. Since $U_{\alpha_1}$ is open we know that there is  a neighborhood around 0, $N_l(0)$ with length $l > 0$ such that $N_l(0) \subset U_{\alpha_i}$. Since $l > 0$ and $\mathbb{N}$ is unbounded there must be a $N$ such that $n > N \ge \frac{1}{l}$, where $N - 1 < \frac{1}{l}$. This is to say $l > \frac{1}{n}$ for $n > N$. So, $N_l(0)$ contains 0, and all members of the set except $K _N = \{1, \frac{1}{2}, \ldots, \frac{1}{N}\}$. Because this set is finite and $K$ is covered by $U_\alpha$ there are a finite number of $\alpha_j$ such that $x \in K_N$ and $x \in U_{\alpha_j}$.  Therefore $U_{\alpha_1}$ and the finite number of $U_{\alpha_j}$ are a finite subcover of K and K is compact.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+%We would like to find a $\delta$ such that for any $x \in K$,  a compact subset of a metric space, the ball $B_\delta(x) \subset U_\alpha$ for some $U_\alpha \in \{U_\alpha\}_{\alpha \in I}$, an open cover of $K$.\\
+%\indent By hypothesis $\{U_\alpha\}_{\alpha \in I}$ is an open cover of K so for all $x \in K$ we have $x \in U_{\alpha_i}$ for some $i \in I$. Since each set in the open cover is open there is an open ball around $x, B(x)$,  such that $B(x) \subset U_{\alpha_i}$. Because there is an open ball around every member of $K$ this constitutes an open cover of $K$ as well. By the compactness of $K$ there is a finite subset of the open balls that cover the set, $\{ B_{\delta_1}(x_1), B_{\delta_2}(x_2), \ldots, B_{\delta_n}(x_n) \}$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Extra Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+Show that a nonempty set M with d having the following properties is a metric space: \\
+i) $d(x,y) = 0 \iff x = y$\\
+ii) $d(x,y) \le d(x,z) + d(y,z)$ \\ \newline
+\indent First we show that $d(x,y) > 0$ if $x \neq y$ which will fill out the first property of a metric space. By property (i) if $x \neq y$ then $d(x,y) \neq 0$. Assuming $x \neq y$ and using property (ii) if we let $y = x$ and $z = y$ then we get $0 = d(x,x) \le d(x,y) + d(x, y) \implies 0 \le 2 \,d(x,y) \implies 0 \le d(x,y)$. Since we have $d(x,y) \neq 0$ if $x \neq y$ we have $d(x,y) > 0$.\\
+\indent For the second property, the symmetry of the metric we use property (ii) by letting $z = x$ to get $d(x,y) \le d(x,x) + d(y,x) \implies d(x,y) \le d(y,x)$ since by property (i) $d(x,x) = 0$. Using property (ii) again we let $x = y$, $y = x$ and $z = x$ and derive $d(y,x) \le d(y,x) + d(x,x) \implies d(y,x) \le d(x,y)$. So we have $d(y,x) \le d(x,y)$ and $d(x,y) \le d(y,x)$ which means $d(x,y) = d(y,x)$ which establishes the second property of the metric.\\
+\indent With symmetry established we show the third property (the triangle inequality) easily. From property (ii) and symmetry we have $d(x,y) \le d(x,z) + d(y,z) \implies d(x,y) \le d(x,z) + d(z,y)$ which is the desired inequality.
+
+
+
+\end{document}  

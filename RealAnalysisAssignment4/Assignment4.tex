@@ -1,0 +1,123 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment 4}
+\author{Andrew Rickert}
+\date{Started: April 8, 2011 \\ \hspace{1pt} Ended: April 20  2011}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are intended to find an open cover of $E = \{(x_1,x_2) | \mathbb{R}^2 : x_1^2 + x_2^2 < 1\} \subset \mathbb{R}^2$. Let the open cover be $C = \cup_{n = 1} U_n$ where $U_n = \{ (x_1,x_2) | \mathbb{R}^2 : x_1^2 + x_2^2 < 1-\frac{1}{n} \}$. Clearly $U_n \subset C$ for all $n \in \mathbb{N}$ but suppose $(x_1,x_2) \in E$ and $ x_1^2 + x_2^2  = r < 1$. Let $\epsilon < 1 - r$, and there must be a $n'$ such that $\frac{1}{n'} < \epsilon$ otherwise $\frac{1}{n} \ge \epsilon \implies \frac{1}{\epsilon} > n$ for all $n \in \mathbb{N}$. Since $\frac{1}{n'} < \epsilon < 1 - r$ this implies that $r < 1 - \frac{1}{n'}$. This means $(x_1,x_2) \in U_{n'}$ so $C \subset \cup U_n$ which implies that $C = \cup U_n$. So, $\cup U_n$ is an open cover. \\
+\indent If we take a finite subset of these then $U_{n_1} \cup U_{n_2} \cdots \cup U_{n_m}$ is not an open cover. Let $p = $min$(n_1,n_2,\cdots,n_m)$ then $U_p$ is the 'largest' subset in the finite subcollection. Since $p < 1$ we can find an $r < 1 - p$ that is, there is an $r$ such that $p < 1 - r$. If we let $(x_1,x_2)$ be such that $x_1 = 0$ and $x_2 = \sqrt{1-r}$ then we have $(x_1,x_2) \in E$ but $x_1^2 + x_2^2 = 1 - r > p$ so $(x_1,x_2) \notin U_{n_1} \cup U_{n_2} \cdots U_{n_m}$. This must be true for any finite subcollection of $U_n$ and there is no finite subcover with the collection $U_n$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+First we must show that $d(\mathbf{x},\mathbf{y}) = \| \mathbf{x} \| + \| \mathbf{y} \|$ when $\mathbf{x} \neq \mathbf{y}$ and $d(\mathbf{x},\mathbf{x}) = 0$ is a metric. Since $\|x\| = \sqrt{\sum_i x_i^2}$ we have $\| x \| \ge 0$ since $x_i^2 \ge 0$. If we assume that $\mathbf{x} \neq \mathbf{y}$ then $\|\mathbf{x}\| \neq 0$ so  $\| \mathbf{x} \| + \|  \mathbf{y} \| > 0$. Also $d(\mathbf{x},\mathbf{y}) = 0$ by definition when $\mathbf{x} = \mathbf{y}$.\\
+\indent The symmetry property is straightforward since $d(\mathbf{x},\mathbf{y})  =  \| \mathbf{x} \| + \| \mathbf{y} \| =  \| \mathbf{y} \| + \| \mathbf{x} \|  = d(\mathbf{y},\mathbf{x})$.\\
+\indent The triangle inequality is also easy since by the remark in the first paragraph $\| \mathbf{z} \| \ge 0$ we have $\| \mathbf{z} \| + \| \mathbf{z} \| \ge 0 \implies \| \mathbf{x} \|  + \| \mathbf{y} \| +  \| \mathbf{z} \| + \| \mathbf{z} \| \ge \|  \mathbf{x} \|  + \| \mathbf{y} \|\implies \| \mathbf{x} \|  + \| \mathbf{z} \| +  \| \mathbf{z} \| + \| \mathbf{y} \| \ge \| \mathbf{x} \|  + \| \mathbf{y} \| \implies d(\mathbf{x},\mathbf{y}) \le d(\mathbf{x},\mathbf{z}) + d(\mathbf{z},\mathbf{x})$.\\
+\indent First we show that there is a set that is open with $d(\mathbf{x},\mathbf{y})$ but not with $d_{Euclid}(\mathbf{x},\mathbf{y})$. By a theorem in Rudin the set $N(\mathbf{x}) = \{ \mathbf{y} | d(\mathbf{x},\mathbf{y}) < r \}$ is open. For the neighborhood $N(\mathbf{x})$ if we pick an $r < \| \mathbf{x} \|$ (assuming $\mathbf{x} \neq 0$) then since $N(\mathbf{x}) = \{ \mathbf{y} | \| \mathbf{y} \| < r - \| \mathbf{x} \| \}$ for $\mathbf{x} \neq \mathbf{y}$ then since $\|\mathbf{y}\| \ge 0$ there is no $\mathbf{y} \in N(\mathbf{x})$ if $\mathbf{y} \neq \mathbf{x}$. However since $d(\mathbf{x},\mathbf{x}) = 0 < r$ then $\mathbf{x} \in N(\mathbf{x})$. This set with one element, that is $\mathbf{x}$, is open in $d(\mathbf{x},\mathbf{y})$ but is not in $d_{Euclid}(\mathbf{x},\mathbf{y})$.\\
+\indent Now we show that every set that is open with respect to $d_{Euclid}(\mathbf{x},\mathbf{y})$ will be open with respect to $d(\mathbf{x},\mathbf{y})$. Now, from the previous discussion it was shown that for all $\mathbf{x} \neq 0$ we can find a neighborhood of $\mathbf{x}$ that consists only of $\mathbf{x}$. So any open set with not containing $0$ can be composed entirely of the one element open sets with the $d(\mathbf{x},\mathbf{y})$ metric which is the definition of being open since these one element sets are neighborhoods. If the neighborhood is around zero then we get the set $N(0) = \{ \mathbf{y} | \| \mathbf{y} < r \}$ which is the same as neighborhood of radius r in $d_{Euclid}(\mathbf{x},\mathbf{y})$. If an open set with the euclidean metric contains 0 then by definition there exists a neighborhood around it contained in the set. Since the neighborhood is the same in both metrics and the remainder of the points can be one-point sets we have shown that every open set in $d_{Euclid}(\mathbf{x},\mathbf{y})$ can be expanded in terms of neighborhoods with the metric $d(\mathbf{x},\mathbf{y})$. So we can always find a neighborhood with metric  $d_{Euclid}(\mathbf{x},\mathbf{y})$ contained in an open set with metric $d_{Euclid}(\mathbf{x},\mathbf{y})$. This is the definition of openness so any open set in $d_{Euclid}(\mathbf{x},\mathbf{y})$ will be an open set in $d_{Euclid}(\mathbf{x},\mathbf{y})$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+To determine which are the compact sets in $\emph{X}$ we need to determine which are the open sets that can be used to cover a set in $\emph{X}$.
+From the definition of open sets it is clear that we need to focus on the neighborhoods that are possible for the given metric. To this end it is clear that there are two types of neighborhoods. For a neighborhood $N_r(x)$ where $r < 1$ the only point that satisfies the requirement on the radius is $x$ itself since $d(x,y) = 0$ if $x = y$ or $d(x,y) = 1$ otherwise.  \\
+\indent However if $r \ge 1$ then every point in $\emph{X}$ satisfies the requirement of the neighborhood.\\
+\indent From this discussion then it is shown that either a neighborhood consists of a single point or it contains the entire space. Now for any infinite set a cover of the set could be a neighborhood of radius $\frac{1}{2}$, or $N_{\frac{1}{2}}(x)$ centered around everypoint in the set. Since this neighborhood only contains one point it is clear that a finite subset would leave out some of the points in the set for otherwise the set would itself be finite. So infinite sets are not compact. This only leaves the possibility of finite sets being compact. \\
+\indent Consider a finite set, any cover will include all the points in the set by definition. A one to one correspondence between the open set that contains a given point and that point always determines a finite cover since the number of points is finite. Therefore all the compact sets in the space are the finite sets.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+First we need to show that the set $E = \{ x | x \in \mathbb{Q} \; \text{and} \; 2 < x^2 < 3\}$ is bounded. Since $x^2 < 3 < 4 \implies x^2 < 4 \implies x < 2$ so the set is bounded above. Similarly since $1 < 2 < x^2 \implies 1 < x^2 \implies 1 < x$ the set is also bounded below and so the set is bounded. \\
+\indent According to a theorem in Rudin there is a rational number between two reals of which the rationals can be considered a subset. That is, there is a $p_1$ such that $\sqrt{2} < p_1 < x < \sqrt{3}$. Next let $p_2 = \frac{p_1+ x}{2}$, the average of the two numbers. Then let $p_3 = \frac{p_2 + p1}{2}$ and so on to define $p_n$. By the closure of the rationals we have produced a series of rational numbers and since $\sqrt{2} < p_n < x$ we have $p_n \in E$. It can be shown by induction that the formula for $p_n$ is $p_n = \frac{p_1}{2^{n-1}} + (1 - \frac{1}{2^{n-1}})x$ for $n \ge 2$. So we have 
+\begin{eqnarray*}
+\lim_{n \to \infty} p_n &=& \lim_{n \to \infty} \frac{p_1}{2^{n-1}} + (1 - \frac{1}{2^{n-1}})x\\
+		            &=& \lim_{n \to \infty} \frac{p_1}{2^{n-1}} + \lim_{n \to \infty} (1 - \frac{1}{2^{n-1}})x\\
+                                    &=& 0 + 1\cdot x
+\end{eqnarray*}
+So we have found a sequence in $E$ that converges to any rational $x$ such that $\sqrt{2} < x < \sqrt{3}$. So every element in $E$ is a limit point but there is the possibility there is a limit point of $E$ not in $E$. If we consider the sequence $p_1= \frac{x + 2}{2}$, $p_2 = \frac{p_1 + 2}{2}$, $p_3 = \frac{p_2 + 2}{2}$ and so on with $p_n = \frac{p_{n-1} + 2}{2}$. By the logic of the previous paragraphs this sequence in $E$ will converge to 2. However, since there is no $x^2 = 2$ in the rationals the limit does not belong to the space $\mathbb{Q}$. This reasoning also holds for $x^2 = 3$ so there are no limit points of $E$ that are contained in $\mathbb{Q}$ but not in $E$. So $E$ contains all of its limit points and is closed.\\
+\indent If we take $U_n = \{ x | x\in \mathbb{Q} \; \text{and} \; 0 < x^2 < 3 - \frac{1}{n} \}$ then this is a cover of $E$. Any finite subset of this cover will have a maximum index $n'$, since $U_n \subset U_{n+1}$ the set $U_{n'}$ must cover the entirety of $E$. Since there will be a rational $p$ between the following reals  $\sqrt{3 - \frac{1}{n'}} < p < \sqrt{3}$ the subcollection does not cover the set.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+For the first part we need to show that the union of two compact sets $X$ and $Y$ is compact. Let $U_{\alpha}$ be a cover of the union $X \cup Y$. Since $X \subset X \cup Y$ then $U_{\alpha}$ covers $X$. Because $X$ is compact we have a finite subcover $\{ U_{n_1}, U_{n_2}, \cdots, U_{n_m} \}$. By the same reasoning $Y \subset X \cup Y$ has a finite subcover $\{ U_{p_1}, U_{p_2}, \cdots, U_{p_q} \}$. The union of these two subcovers is then a cover of $X \cup Y$ and has $m + p$ elements, so we have found a finite subcover of the union and $X \cup Y$ is compact.\\
+\indent The last part requires us to show that the intersection of compact sets is compact. By a theorem in Rudin, compact sets are closed. So, both $X$ and $Y$ are closed, by another theorem in Rudin their intersection is closed as well. Since $X \cap Y \subset X$ we have a closed subset of a compact set. According to Rudin this set must be compact as well, therefore $X \cap Y$ is compact.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+Briefly, the reason set $\{ 1 \}$ cannot have a limit point is because the definition of the limit point requires an arbitrary neighborhood around the limit point to contain a point of the set different from the limit point. This would be impossible since 1 is the only point in the set.\\
+\indent For the problem we need to show that the limit of a convergent sequence with infinitely many distinct points is the limit point of the sequence considered as a set of points in a metric space. \\
+\indent By the definition of convergence $ \{ p_n \}$ converges to $p$ if for every $\epsilon$ there is an $N$ such that $n \ge N$ and $d(p_n,p) < \epsilon$. Now we can conceptualize the sentence 'infinitely many distinct points' as saying for any given $n'$, there exists an $m > n'$ such that $p_m$ is not equal to any $p_i$ with $i < n'$. In other words there always exists a distinct element in the sequence after any given point. This point can also always be chosen to be different from $p$ for otherwise $p_i = p$ for $i > n'$. \\
+\indent Now we let $n' = N$, by the previous discussion there is a distinct $p_m$ such that $m > N$. By the convergence of $\{ p_n \}$ we have $d(p_m,p) < \epsilon$. So, if we form the neighborhood around $p$, $N_\epsilon(p)$,  the previous comments show that there will be $p_m \in N_\epsilon(p)$ and $p_m \neq p$. Since $\epsilon$ was arbitrary we have shown that every neighborhood around the point contains an element of the sequence so $p$ is a limit point.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We need a countable sequence in $[0,1]$ such that every point in the segment is a subsequential limit. Since the rationals are countable the set of all rationals in $[0,1]$ will be enough to satisfy the requirements of the theorem. This will be shown to arise from the density of the rationals.\\
+\indent First we note that any neighborhood of a point in $[0,1]$ contains infinitely many elements. To see we observe if $x \in [0,1]$ then there is a rational in $N_\epsilon(x)$ since both $x-\epsilon$ and $x+\epsilon$ are real numbers. This is because a theorem in rudin says that between any two reals there is a rational so we can find a $x' \in [0,1]$ such that $x-\epsilon < x' < x$ or $x < x' < x + \epsilon$. If we pick a new neighborhood $N_\epsilon(x)$ such that $epsilon < x' - x$ then we may find a new point in $[0,1]$ by rudin's theorem. We may continue this process to get an infinite number of points.\\
+\indent Since the rationals are countable we can put them in a sequence $\{ p_n \}$. Lets take an element $x \in [0,1]$, and consider the neighborhood $N_r(x)$. If $x = 0$ or $x = 1$ we let $r = \frac{1}{2}$ otherwise we let $r = \text{min}(x,1-x)$. By the previous paragraph we can find a member of the sequence  $p_{n_1}$ in $[0,1]$ such that $|p_{n_1} -x| < r$. Since every interval contains an infinity of members of $[0,1]$ we see by the same reasoning as before that we can find a $p_{n_2}$ in $[0,1]$ such that $n_2 > n_1$ and $|p_{n_2} - x| < \frac{r}{2}$. By repeating the previous reasoning we find a sequence such that $|p_{n_k} - x| < \frac{r}{2^k}$. Since $\lim_{k \to \infty} \frac{r}{2^k} \to 0$ we have $p_{n_k} \to x$ where the subsequence is entirely in $[0,1]$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 8\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+Closures of connected sets are connected. We note that  $E \subset \overline{E}$ where $\overline{E}$ is the closure of the set $E$. This means that if $A$ and $B$ are connected sets then for the closure of each set $\overline{A}$, and $\overline{B}$ we have $\emptyset \neq A \cap B \subset \overline{A} \cap \overline{B} \subset \overline{\overline{A}} \cap \overline{B}$. The last step comes from a theorem in rudin that says $\overline{\overline{E}} = \overline{E}$. We have shown that the intersection of one of the sets with the closure of the other set is not empty. This is the definition of connectedness so closures are connected.\\
+\indent The interiors of connected sets do not need to be connected though. If we consider the example of the sets $A = [ 0, 1 ]$ and $B = (1,2)$ we can see that these sets are connected. Since $\overline{B} = [ 1,2 ]$ then $A \cap \overline{B} = \{ 1 \}$ the sets satisfy the definition of connectedness. Since the interior of $A$ is $A^\circ = (0,1)$ we can see that $A \cap \overline{B} = \overline{A} \cap B = \emptyset $. So the interiors of connected sets are not necessarily connected.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Extra Problem \\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\end{document}  

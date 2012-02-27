@@ -1,0 +1,145 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment 7}
+\author{Andrew Rickert}
+\date{Started: May 4, 2011 \\ \hspace{1pt} Ended: June 20,  2011}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We need to show that the series $\sum_{i = 0} (-1)^i a_i = a_0 - a_1 + a_2 - a_3 + ... $ converges given that  $a_i \ge 0$ and $ a_i \ge a_{i+1}$ and well as the fact that $\lim_{n \to \infty} a_n = 0$. If we let $s_n = \sum_{i = 0}^n (-1)^i a_i$ then we have the following relation 
+
+\begin{equation} 
+|s_{n+k} - s_n| = |a_{n+1} - a_{n+2} + ... + (-1)^{n+k} a_{n+k}| \label{eqn:partaltsum}
+\end{equation}
+
+We may always start with positive terms in the above expression because a negative in the leading term can be factored out and cancelled by the absolute value. Looking at equation (\ref{eqn:partaltsum}) we can see that we will need to handle the case where the partial series ends in a positive or negative term. \\
+\indent Let's assume that the final term is positive. We may then group the terms in (\ref{eqn:partaltsum}) as follows
+\[ S = a_{n+1} + (-a_{n+2} + a_{n+3}) + (-a_{n+4} + a_{n+5}) + .... + (-a_{n+k-1} + a_{n+k}) \]
+By hypothesis we have that $a_i \ge a_{i+1} \implies 0 \ge -a_i + a_{i+1} $ which says that that values of the terms in the parenthesis are all negative which says that $S \le a_{n+1}$.\\
+If we now assume that the last term is negative we may group the terms again as in the above to form
+\[ S = a_{n+1} + (-a_{n+2} + a_{n+3}) + (-a_{n+4} + a_{n+5}) + .... + (-a_{n+k-2} + a_{n+k-1}) - a_{n+k} \]
+By the previous reasoning all the terms in the parenthesis are negative as well as $-a_{n+k}$ which allows us to once again say that $S \le a_{n+1}$. So we have shown in all cases that 
+
+\begin{equation}
+|s_{n+k} - s_n| \le a_{n+1} \label{eqn:partaltineql}
+\end{equation}
+
+Because $a_n$ converges to 0 for a given $\epsilon$ we have $N$ such that for $n > N$ we have $|a_n| < \epsilon$. Applying this to equation $(\ref{eqn:partaltineql})$ gives 
+\[ |s_{n+k} - s_n| \le a_{n+1} < \epsilon \]
+
+Since $n+k > N$ for all $k \in \mathbb{N}$ we can let $m = n+k$ which shows that $(s_n)$ is a cauchy sequence. By the completeness of the real numbers this sequence converges to a real number.
+
+
+\newpage
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are given the function with $x \in (0,1)$ as $f(x) = 0$ when $x$ is irrational and $f(x) = \frac{1}{q}$ when $x = \frac{p}{q}$ and the fraction is in lowest terms. \\
+\indent First we show that if $(p_n)$ is any sequence of rationals where $\lim_{n \to \infty} r_n = r$ and $r_n \neq r$ for all $n$ then letting $r_n = \frac{p_n}{q_n}$ we have $\lim_{n \to \infty} q_n = \infty$. In other words, for any convergent sequence of distinct rationals the denominator increases without bound.\\
+\indent Suppose that this did not happen, that the sequence of denominators $(q_n)$ was bounded above with bound $q$. Then since all rationals are in $(0,1)$ we know that each rational is of the form $\frac{p_n}{q_n}$ where $p_n \le q_n -1$ and $q_n \le q$. So there are a finite number of rationals that are possible in the sequence. Because the sequence converges to $r$ if we have $\epsilon > 0$ there is a $N$ such that $n > N$ implies that $|r_n - r| < \epsilon$. This allows to pick a $r_1'$ that satisfies the inequality, then by reducing to $\epsilon/2$ we may find another $N'$ and pick an $r_2'$ and so on. This produces an infinity of rationals distinct from $r$ which shows assuming the boundedness of the denominators leads to a contradiction. \\
+\indent It is clear that a sequence of irrationals $(i_n)$ such that $\lim_{n \to \infty} i_n= x'$ will give $\lim_{i_n \to x'} f(i_n)  = 0$ since $f(i_n) = 0$ for all irrationals. \\
+\indent If we have a sequence of rationals $(r_n)$ such that $\lim_{n \to \infty} r_n = x'$ then we will also have \\$\lim_{r_n \to x'} f(r_n)  = 0$. This is because $r_n = \frac{p_n}{q_n}$ so $f(r_n) = \frac{1}{q_n}$. By the previous discussion we have $\lim_{n \to \infty} q_n = \infty$ which makes $\frac{1}{q_n}$ a subsequence of the sequence $\frac{1}{n}$ which converges to zero so \\ $\lim_{r_n \to x'} f(r_n)  = 0$.\\
+\indent Because a finite number of terms do not effect the limit we only need to consider the case when a sequence which converges to a point in $(0,1)$ that contains an infinitude of rationals and irrationals. If we let $(x_n)$ be such a sequence then we may form two subsequences of $(f(x_n))$. We let $f_{2m} = f(x_n)$ if $x_n$ is irrational and $f_{2m-1} = f(x_n)$ if $x_n$ is rational. By the previous comments both of these sequences converge to 0 and by a previous homework the entire sequence $(f(x_n))$ must converge to zero.\\
+\indent So we have shown that every sequence that converges to a point in (0,1) also has the property that $\lim_{x_n \to x'} f(x_n) = 0$. By a theorem in rudin this implies that $\lim_{x \to x'} f(x) = 0$ for all $x \in (0,1)$. By another theorem in rudin a function is only continuous if $\lim_{x \to x'} f(x) =f(x')$. For the irrationals we satisfy this version of continuity since $f(i) = 0$ for an irrational $i$. However since $f(r) = \frac{1}{q} \neq 0$ for a rational $r$ the function is discontinuous at every rational.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Part a) We need to show that $f(\mathcal{Q})$ is dense in $f(\mathcal{M})$ if $\mathcal{Q}$ is dense in $\mathcal{M}$.\\
+\indent Let $m \in \mathcal{M}$ be such that $f(m) \notin f(\mathcal{Q})$ for otherwise we are already done. Because $\mathcal{Q}$ is dense in $\mathcal{M}$ there is a sequence $(q_n)$ such that $q_n \in \mathcal{Q}$ and $q_n \neq m$ for all $n$ and $\lim_{n \to \infty} q_n = m$. By the continuity of $f$ we have from rudin that $\lim_{n \to \infty} q_n = m \implies \lim_{n \to \infty}f(q_n) = f(m)$. Thus for a given point in $\mathcal{M}$ there is always a sequence in $\mathcal{Q}$ that limits to this point. By the definition of the limit of a sequence and the fact that $q_n \neq m$ for all $n$ we can say that every neighborhood of $f(m)$ contains an element of $f(q_n) \in f(\mathcal{Q})$. So every point of $f(\mathcal{M})$ is either a point of $\mathcal{Q}$ or a limit point of $\mathcal{Q}$ which shows that this set is dense in $f(\mathcal{M})$.\\
+
+\noindent Part b) Now we need to show that $f(x) = g(x)$ for all $x \in \mathcal{M}$ if $f(x) = g(x)$ for $x \in \mathcal{Q}$.\\
+\indent By hypothesis $\mathcal{Q} \subset \mathcal{M}$, so we only need to show that $f(x) = g(x)$ when $x \notin \mathcal{Q}$ and $x \in \mathcal{M}$. We know that if $q_n \in \mathcal{Q}$ is such that $\lim_{n \to \infty} q_n = m$ and $q_n \neq m$ for all $n$ then by the continuity of $g$ we have $\lim_{n \to \infty} g(q_n) = g(m)$. So if $f(m) \neq g(m)$ for some $m \in \mathcal{M}$ but $m \notin \mathcal{Q}$ let $\lim_{n \to \infty} q_n = m$ where $q_n \in \mathcal{Q}$. So we have $\lim_{n \to \infty} f(q_n) = \lim_{n \to \infty} g(q_n) = g(m) \neq f(m)$ which shows that $f$ is not continuous contrary to hypothesis. The contradiction establishes the result.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Part a) We need to find a $f$ such that $f$ is continuous and an $E \subset \mathbb{R}$ where $E$ is bounded and $f(E)$ is unbounded.\\
+\indent If we let $E = (0,1)$ and $f = \{ \frac{1}{x} | x \in E \}$ then we have satisfied the requirements. We first show that the function is continuous on $E$. Since $f' = 1$ and $f'' = x$ are plainly continuous on $E$ theorem in rudin says that the $\frac{f'}{f''}$ must be continuous for $f'' \neq 0$. Also if $f(E)$ is bounded then we have $f(x) < M$ for all $x \in (0,1)$. This implies that $0 < \frac{1}{M} < x$ which is false since by the density of the reals there must be a $0 < x' < \frac{1}{M}$ but $x' \in (0,1)$.\\
+
+\noindent Part b) We now need to show that if $f$ is uniformly continuous and $E$ is bounded that $f(E)$ must also be bounded.\\
+\indent This is equivalent to showing that if $E$ is bounded and $f(E)$ is unbounded then $f$ is not uniformly continuous. Let $\frac{M}{2}$ be the bound on $E$ so that $E \subset [-\frac{M}{2},\frac{M}{2}]$. By hypothesis $f(E)$ is unbounded so we pick a point $p_1 \in E \cap  [-\frac{M}{2},\frac{M}{2}]$. Next we divide the interval in two into $ [-\frac{M}{2},0]$ and $[0,\frac{M}{2}]$. The function must be unbounded in at least one of the two sets otherwise $f(E)$ is bounded. We pick a point $p_2$ in this set. We continue dividing each set and choosing a point in the unbounded portion of the division and produce a sequence $(p_n)$ such that $p_n \in A_n$ where $A_n$ is the $n^\text{th}$ set chosen to contain an unbounded portion of $f$. It is clear that $A_n \subset A_{n+1}$ and since each set is closed an bounded we have sequence compact sets. A theorem in rudin states that there must be one and only one point $p$ common to all of these intervals. From the definition of $(p_n)$ we also have $d(p_n,p) < \frac{M}{2^{n-1}}$ so $\lim_{n \to \infty} p_n = p$.\\
+\indent From the way the intervals were picked we know that $\lim_{n \to \infty} f(p_n) = \infty$. For us this means that for each $B$ there is an $N$ such that $f(p_n) > B$ for all $n > N$. To show that the function is not uniformly continuous we need to find a $\epsilon$ and two points $x,x' \in E$ such that for any $\delta$ we have $|x-x'| < \delta$ and $|f(x)-f(x')| \ge \epsilon$. Let us choose $\epsilon = 1$, by the convergence of $(p_n)$ we must have a cauchy sequence so there exists an $N$ such that $m,n > N$ implies $|p_n-p_m| < \delta$. Let $D = f(p_m)$ for some $m > N$, since $(f(p_n))$ converges to infinity there must be an $r > N$ such that $f(p_r) \ge D+1$. For these two points $p_m,p_r \in E$ we have $|f(p_r)-f(p_m)| \ge 1$ as needed to be shown.\\
+ 
+\noindent Part c) Finally, we need to find a function from an unbounded set $E$ to an unbounded set $f(E)$ that is uniformly continuous.\\
+\indent If we take $E= \mathbb{R}$ and $f(x) = x$ then we can easily show that the function is uniformly continuous. If we take $\delta = \epsilon$ then we have for $x,x' \in E$
+\[ |x-x'| < \delta \implies |f(x)-f(x')| < \delta \implies |f(x)-f(x')| < \epsilon \]
+Since $f(x) = x$ for $x \in \mathbb{R}$ and $\mathbb{R}$ is unbounded then $f(E)$ must be unbounded.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Part a) We want to show that if $f: \mathcal{M} \to \mathcal{N}$ is uniformly continuous and if $(p_n)$ is a Cauchy sequence in $\mathcal{M}$ then $(f(p_n))$ is a Cauchy sequence in $\mathcal{N}$.\\
+\indent Since $f$ is uniformly continuous we know that for and $\epsilon$ and $x, x' \in \mathcal{M}$ there exists a $\delta$ such that $d(x,x') < \delta \implies d(f(x),f(x')) < \epsilon$. Let $(p_n)$ be a cauchy sequence, for a given $\delta$ there exists a $N$ such that for $m,n > N$ $d(p_m,p_n) < \delta$. By the previous remark this means that $d(f(p_m),f(p_n)) < \epsilon$ for $m,n > N$ so $(f(p_n))$ is a cauchy sequence. \\
+
+\noindent Part b) Now we want to show that $f(x) = x^2$ is not uniformly continuous eventhough it sends cauchy sequences to cauchy sequences.\\
+\indent By the completeness of $\mathbb{R}$ a cauchy sequence converges to a point $p \in \mathbb{R}$. By the continuity of $f$ we know that that cauchy sequence $(p_n)$ is such that $\lim_{n \to \infty} p_n = p \implies \lim_{n \to \infty} f(p_n) = f(p)$. Thus the sequence $(f(p_n))$ converges and by a theorem in rudin must also be a cauchy sequence.\\
+\indent Now we need to show that the function $f$ is not uniformly continuous. Let's pick $\epsilon = 1$ and for any $0 < \delta$ we choose a $d$ such that $d < \delta$ and consider all $x,x' \in \mathbb{R}$ such that $d < |x-x'| < \delta$. We pick $x \in \mathbb{R}$ so that $\frac{1}{2d} < x$. Now there must exist a $x' \in \mathbb{R}$ so that $\frac{1}{2d} < x' < \delta$ by the archimedean property so we have $0 < |x - x'| < \delta$. However we must also have \[|x^2 - x'^2| = |x+x'||x-x'| > |x+x'|d > (\frac{1}{2d}+\frac{1}{2d})d = \frac{1}{d}d = 1\]
+This is true for all $\delta$ and so the function is not uniformly continuous.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We would like to show that for two disjoint sets $K$, which is compact, and $F$, which is closed, that there exists a $\delta$ such $d(x,y) > \delta$ for all $x \in K$ and $y \in F$.\\
+\indent In problem 6 it was shown that the function $d_E(x) = \inf_{z \in E} \, d(x,z)$ is well defined and continuous. Because the function $d_E(x)$ is continuous and $K$ is closed by its compactness, we know by a theorem in Rudin that that $d^{-1}_F(K)$ must also be closed. \\
+\indent Since $d_F(x) > 0$ for all $x \in F$ we know that there is a greatest lower bound for the set of values of $d_F(x)$ and we let this value be $B$. We form the interval $[B,C]$ where $B < C$ and note by the previous comments there must be a $x_0 \in K$ such that $d_F(x_0) = B$. \\
+\indent Suppose that $B = 0$, then $d(x_0,z) < \epsilon$ for all $\epsilon$ and $z \in F$. This means that $x_0$ is a limit point of $F$ so $x_0 \in F$ since F is closed. This violates the hypothesis that the sets $F$ and $K$ are disjoint. So $B > 0$.
+
+
+
+%\vspace{15pt}
+%\begin{flushleft} 
+%\textbf{Class 18.100B} - Extra Problem 1\\
+%\rule{500pt}{1pt}\\
+%\end{flushleft} 
+
+
+\end{document}  

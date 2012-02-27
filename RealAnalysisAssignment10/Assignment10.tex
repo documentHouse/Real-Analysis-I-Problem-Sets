@@ -1,0 +1,308 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment 10}
+\author{Andrew Rickert}
+\date{Started: January 17, 2011 \\ \hspace{1pt} Ended: January 26,  2011}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent First, we want to show that a sequence of functions defined by 
+\[ f_0(t) = \sin t \quad \text{and} \quad f_{n+1}(t) = \frac{2}{3}f_n(t) + 1\]
+is such that $\lim_{n \to \infty} f_n(t) \to 3$ uniformly on $\mathbb{R}$. Lastly we want to know what happens in the case that $f_0(t) = t^2$.\\
+\indent We answer both questions by considering the mapping $T(x) = \frac{2}{3}x + 1$. If we define $T_1(x) = T(x)$ and $T_{n+1}(x) = \frac{2}{3}T_n(x) + 1$ then we find that
+\begin{equation}
+T_n(x) = \left( \frac{2}{3} \right)^n x + \sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k \quad \text{for $n \ge 1$} \label{eqn:Tfunction}
+\end{equation}
+This can be shown inductively. For $n=1$ we have $T_1 =  \left( \frac{2}{3} \right)^1 x +  \left( \frac{2}{3} \right)^0 =  \frac{2}{3} x + 1$ which establishes the induction base. Now we assume the formula ($\ref{eqn:Tfunction}$) is true for $T_n$ and calculate as follows:
+\begin{eqnarray*}
+T_{n+1}(x) &=& \frac{2}{3}T_n(x) + 1 \\
+		 &=& \frac{2}{3}\left( \left( \frac{2}{3} \right)^n x + \sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k \right) + 1 \\
+		 &=& \left( \frac{2}{3} \right)^{n+1} x + \sum_{k=1}^{n} \left( \frac{2}{3} \right)^k + 1 \\
+		 &=& \left( \frac{2}{3} \right)^{n+1} x + \sum_{k=0}^{n} \left( \frac{2}{3} \right)^k\\
+\end{eqnarray*}
+So the formula ($\ref{eqn:Tfunction}$) is true for $n+1$ which completes the induction.\\
+We now let $x = \sin t$ and get $f_n(t) = T_n(\sin t)$. We choose $N_1$ such that $|\sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| < \frac{\epsilon}{2}$ for $n > N_1$ and $N_2$ such that $|\left( \frac{2}{3} \right)^n| < \frac{\epsilon}{2}$ for $n > N_2$. If we let $N = $ Max$(N_1, N_2)$ we may calculate as follows:
+\begin{eqnarray*}
+|f_n(t) - 3| &=& |\left( \frac{2}{3} \right)^n \sin t + \sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| \\
+		&\le& |\left( \frac{2}{3} \right)^n \sin t| + |\sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| \\
+		&\le& |\left( \frac{2}{3} \right)^n| + |\sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| \quad \text{since \;$\sin t \le 1$ for $t \in \mathbb{R}$} \\
+		&\le& \frac{\epsilon}{2} + \frac{\epsilon}{2} \quad \text{for $n \ge N$} \\
+		&=& \epsilon
+\end{eqnarray*}
+So we have shown that $|f_n(t) - 3| < \epsilon$ for $t \in \mathbb{R}$ which gives the uniform convergence of $f_n \to 3$.\\
+\indent If we now let $x = t^2$ then $f_n(t) = T_n(t^2)$. If the domain of $f_0(t) = t^2$ is bounded, then $t^2 \le b^2$ where $b$ is the bound. Since $\lim_{n \to \infty} c x_n = c \lim_{n \to \infty} x_n$ where $c$ is a constant we may pick an $N_1$ such that $|\left( \frac{2}{3} \right)^n b^2| < \frac{\epsilon}{2}$ where $n > N_1$. We may perform the same calculation as above to derive:
+\begin{eqnarray*}
+|f_n(t) - 3| &=& |\left( \frac{2}{3} \right)^n t^2 + \sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| \\
+		&\le& |\left( \frac{2}{3} \right)^n t^2| + |\sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| \\
+		&\le& |\left( \frac{2}{3} \right)^n b^2| + |\sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| \quad \text{since $t \le b$ for $t \in [a,b]$} \\
+		&\le& \frac{\epsilon}{2} + \frac{\epsilon}{2} \quad \text{for $n \ge N$} \\
+		&=& \epsilon
+\end{eqnarray*}
+If the domain of $f_0(t) = t^2$ is $\mathbb{R}$ then we may chose $t'_n = \sqrt{3 \left( \frac{3}{2} \right)^n}$ which gives 
+\begin{eqnarray*}
+ |f_n(t'_n) - 3| &=& |\left( \frac{2}{3} \right)^n t_n^{'2} + \sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| \\
+ 		      &=& |\left( \frac{2}{3} \right)^n \left( 3 \left( \frac{3}{2} \right)^n \right) + \sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| \\
+		      &=& | 3 + \sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k - 3| \\
+		      &=& |\sum_{k=0}^{n-1} \left( \frac{2}{3} \right)^k| \ge 1
+\end{eqnarray*}
+So $ |f_n(t'_n) - 3| \ge 1$ for all $n$ which shows that in the case of the unbounded domain the function sequence can not converge.
+\newpage
+ 
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are given a function $\varphi : [0,\infty) \to \mathbb{R}$ and given that it is continuous satisfies the following:
+\[ 0 < \varphi(t) \le \frac{t}{2+t} \quad \text{for $t \in [0,\infty)$} \]
+If we know define a sequence by $f_0(t) = \varphi(t)$ and $f_{n+1}(t) = \varphi(f_n(t))$ and let 
+\[ F(t) = \sum_{n=0}^\infty f_n(t) \]
+then we want to show that $F$ is continuous and converges for every $t \in [0,\infty)$.\\
+
+\noindent We start by defining a sequence $S_n$ as follows 
+\begin{equation}
+S_n(t) = \sum_{k = 0}^n f_n(t)
+\end{equation}
+
+\noindent Since $\varphi : [0,\infty) \to (0,1)$, $f_0(t) = \varphi(t)$ and $f_{n+1}(t) = \varphi(f_n(t))$ it can be shown inductively that $f_n : [0,\infty) \to (0,1)$ for $n \ge 0$.  Because $\varphi(t)$ is continuous for $t \in [0,\infty)$ and $f_n(t) = \varphi(f_{n-1}(t))$ it follows from the previous statements that $f_n$ is continuous for $n \ge 0$. Intuitively this is so because $f_n(t)$ is just $\varphi(t)$ with a domain restricted to an interval subset of $[0,\infty)$. \\
+\indent Because the finite sum of continuous functions is continuous, $S_n$ is continuous for all $n$. By a theorem in rudin we can solve the problem by showing the uniform convergence of $S_n$ which says then that $\lim_{n \to \infty} S_n = F(t)$ is continuous.\\
+\indent First we show that the function $B(t) = \frac{t}{2+t}$ is increasing on $t \in [0,\infty)$. This is shown in the following calculation. Let $t_1 \le t_2$:
+\begin{eqnarray*}
+t_1 \le t_2 &\implies& 2 t_1 \le  2 t_2 \\
+	       &\implies& 2 t_1 + t_1 t_2 \le  2 t_2 + t_1 t_2 \\
+	       &\implies& t_1 (2 + t_2) \le t_2 (2 + t_1) \\
+	       &\implies& \frac{t_1}{2 + t_1} \le  \frac{t_2}{2 + t_2}  \quad \text{ since $0 \le t_1,t_2$}\\
+	       &\implies& B(t_1) \le  B(t_2)
+\end{eqnarray*}
+This shows that $B(t)$ is an increasing function. This allows us to show that if $b$ is an upper bound on a set $T$ that is, if $t \le b$ for $t \in T$ and $f$ is increasing on $T$ then, $f(b)$ is an upper bound for $f(T)$. This is true because $t \le b$ for all $t \in T$ and since $f$ is increasing we have $f(t) \le f(b)$ for all $t \in T$ which shows that $f(b)$ is an upper bound for $f(T)$.
+We now show that 
+\begin{equation}
+f_n(t) < \frac{1}{2^{n+1}-1} \quad \text{for $n \ge 0$} \label{eqn:fnbound}
+\end{equation}
+For $n = 0$ we have $f_0(t) = \varphi(t)$. Since $0 \le t$ then $0 \le t < t + 2$ we get $0 \le \frac{t}{2+t} < 1$. This establishes the induction base. We now assume the relationship in ($\ref{eqn:fnbound}$) holds. 
+\newpage
+We calculate as follows:
+\begin{eqnarray*}
+f_{n+1}(t) &=& \varphi(f_n(t)) \\
+	     &\le& \frac{f_n(t)}{2 + f_n(t)} \\
+	     &<& \frac{ \frac{1}{2^{n+1}-1} }{ 2 + \frac{1}{2^{n+1}-1} } \quad \text{because B(t) is increasing}\\
+	     &=&  \frac{ \frac{1}{2^{n+1}-1} }{\frac{2(2^{n+1}-1) + 1}{2^{n+1}-1} } \\
+	     &=&  \frac{1}{2(2^{n+1}-1) + 1}\\
+	     &=&  \frac{1}{2^{n+2}-1}\\
+\end{eqnarray*}
+This completes the induction.
+Since $x_n = \frac{1}{2^{n+1}-1} < \frac{1}{2^{n+1}}$ is a geometric series we know that $\sum_n x_n$ converges. By the cauchy convergence criterion for a given $\epsilon$ there is an $N$ such that for $n,m > N$ we have 
+\begin{equation}
+|\sum_m^n  \frac{1}{2^{n+1}-1} | < \epsilon \label{eqn:geocauchy}
+\end{equation}
+
+\noindent For $\epsilon$ we choose $N$ as above and calculate:
+\begin{eqnarray*}
+|S_n(t)-S_m(t)| &=& |\sum_{k=m}^n f_k(t)| \\
+		         &<& |\sum_{k=m}^n \frac{1}{2^{n+1}-1}| \quad \text{by equation ($\ref{eqn:fnbound}$)} \\
+		         &<& \epsilon  \quad \text{by equation ($\ref{eqn:geocauchy}$)} \\
+\end{eqnarray*}
+By the cauchy criterion of uniform convergence the sequence $S_n(t) = \sum_{k=0}^n f_n(t)$ converges uniformly which finishes the problem.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+ 
+ We would like to know whether or not the following expression defines a differentiable function on $\mathbb{R}$:
+ \begin{equation}
+ f(t) = \sum_{k=1}^\infty \sin^2 \frac{t}{k} \nonumber
+ \end{equation}
+ 
+ We start by defining the sequence $f_n(t) = \sum_{k = 1}^n \sin \frac{t}{k}$.  By a theorem in rudin, if we can show that there is an $x \in \mathbb{R}$ such that $f_n(x)$ converges and that the sequence $f'_n(t)$ converges uniformly we know the following: That $f_n$ converges uniformly and that $\lim_{n \to \infty} f'_n(t) = f'(t)$. This is to say that $f(t)$ is differentiable which answers the question.\\
+\indent It is now required that first we find a point in $\mathbb{R}$ where $f_n$ converges. This is easy since $f_n(0) = 0$ for all $n \ge 1$. The next part, which is harder, is to show that $f'_n(t)$ converges uniformly.  Only a neighborhood around a given point is necessary to determine differentiability. To show the differentiability for all $t$ we chose a closed neighborhood around $t'$, $[t'-d,t'+d]$ where $d \in \mathbb{R}$. Since the $t'$ and $d$ were chosen arbitrarily the result that the $f(t)$ is differentiable at and around $t'$ applies to all $t \in \mathbb{R}$.\\
+\indent The expression for this derivative sequence is
+\begin{equation}
+ f'_n(t) = \sum_{k=1}^n \frac{2}{k} \sin \frac{t}{k} \cos \frac{t}{k} = \sum_{k=1}^n \frac{1}{k} \sin \frac{2t}{k} \label{eqn:fderivsequence}
+\end{equation}
+Now we consider that since $\sum_{k=1}^\infty \frac{2}{k^2}$ converges then for $\epsilon$ there exists $N$ where if $n > N$ we have $|\sum_m^n \frac{2}{k^2}| < \frac{\epsilon}{b}$ where $b = t+d$ the upper bound of the closed interval. We now calculate for $t' \in [t-d,t+d]$:
+\begin{eqnarray*}
+|f'_n(t) - f'_m(t)| &=& |\sum_m^n \frac{1}{k} \sin \frac{2t}{k}| \quad \text{ by ($\ref{eqn:fderivsequence}$) } \\
+			&\le& |\sum_m^n \frac{1}{k} \left( \frac{2t}{k} \right) | \quad \text{since $|\sin t| < |t|$}\\
+			&=& |\sum_m^n \frac{2t}{k^2} | \\
+			&\le& |\sum_m^n \frac{2b}{k^2} |  = |b \sum_m^n \frac{2}{k^2} | < |b \frac{\epsilon}{b}| = \epsilon\\
+\end{eqnarray*}
+This shows the $f'_n(t)$ satisfies the cauchy criterion of uniform convergence which shows by the previously mentioned theorem in rudin that $f'_n(t) \to f'(t)$ uniformly for $t \in [t'-d,t'+d]$. Since $t'$ and $d$ where arbitrary this finishes the proof. 
+ 
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We want to show that if $x_n \to x$ and $f_n$ is sequence of continuous function such that $f_n \to f$ uniformly then $lim_{n \to \infty} f_n(x_n) \to f(x)$.\\
+Because $x_n \to x$ and the $f_n$ are continuous then $f(x_n) \to f(x)$. That is, for $\epsilon$ there exists an $N_1$ such that for $n > N_1$ we have
+\begin{equation}
+|f(x_n) - f(x)| < \frac{\epsilon}{2} \nonumber
+\end{equation}
+
+\noindent From the uniform convergence of $f_n$ for $\epsilon$ there exists $N_2$ so if $n > N_2$
+\begin{equation}
+|f_n(x) - f(x)| < \frac{\epsilon}{2} \nonumber
+\end{equation}
+
+\noindent Now we let $N = $ Max$(N_1,N_2)$ so for $n > N$ we have 
+\begin{eqnarray*} 
+|f_n(x_n) - f(x)| &=& |f_n(x_n)-f(x_n) + f(x_n) - f(x)| \\
+		        &\le& |f_n(x_n)-f(x_n)| + |f(x_n) - f(x)| \\
+		        &<& \frac{\epsilon}{2} + |f(x_n) - f(x)| \quad \text{By uniform convergence}\\
+		        &<& \frac{\epsilon}{2} + \frac{\epsilon}{2} \quad \text{By continuity}\\
+		        &=& \epsilon
+\end{eqnarray*}
+
+So for $\epsilon$ there exists $N$ such that for $n > N$ we have $|f_n(x_n)-f(x)| < \epsilon$ which is to say that $\lim_{n \to \infty} f_n(x_n) \to f(x)$. This completes the first part of the problem.\\
+%For the second part we take $f_n(x) = \frac{1}{(1+x)^n}$ for $n \ge 1$ and $E = [0,1]$. Since $f(x) = 1+x$, $x^n$ ,$\frac{1}{x}$ are continuous on $E$ and compositions are continuous we know that $f_n(x) = \frac{1}{(1+x)^n}$ is continuous or all $n$. \\
+%We now need to show that $f_n(x_n) \to f(x)$ for all $x_n \to x$. Since the limit function $f(x) \neq 0$ only when $x = 0$ we split the demonstration up into two parts. First we show that $f_n(x_n) \to 0$ if $x_n \to 0$.\\
+%\indent Since $x_n \to x > 0$ we pick a $d > 0$ such that $0 < d < x$ so that 
+%\begin{equation}
+%0 < x - d \label{eqn:nonzerobound}
+%\end{equation}
+%By the convergence of $x_n$ there exists an $N_1$ for $d$ such that if $n > N_1$ we have $|x_n - x| < d$. This implies that $-d < x_n - x < d$ which gives
+%\begin{eqnarray}
+%x-d < x_n &\implies& 0 < x-d < x_n \quad \text{By equation $(\ref{eqn:nonzerobound})$}\nonumber \\
+%	       &\implies& 1 < 1+  x-d < 1+ x_n \nonumber \\
+%	       &\implies& \frac{1}{1+ x_n} < \frac{1}{1+  x-d} \label{eqn:nonzeroupper}
+%\end{eqnarray}
+%We may now calculate the limit for the case $x_n \to x > 0$. Since $1 < 1 + x - d$  by the previous comments we have $\lim_{n\to \infty} \frac{1}{(1+x - d)^n} = 0$ by a theorem in rudin that says: $\lim_{n \to \infty} |x|^n = 0$ if $|x| < 1$. This allows us to show that:
+%\[ \lim_{n \to \infty} f_n(x_n) = \lim_{n \to \infty} \frac{1}{(1+x_n)^n} <  \lim_{n \to \infty} \frac{1}{(1+x - d)^n}  = 0 \quad \text{By equation ($\ref{eqn:nonzeroupper}$) }\]
+%\indent We now show that if $x_n \to 0$ that $\lim_{n \to \infty}f_n(x_n) = 1$. Since $x_n \in [0,1]$ we have 
+%\[ 0 < x_n \implies 1 < 1 + x_n \implies 1 < (1 + x_n)^n \implies \frac{1}{(1 + x_n)^n} < 1\]
+%We can calculate as follows:
+%\begin{eqnarray*}
+%|f_n(x_n) - 1| = |\frac{1}{(1 + x_n)^n} - 1| &=& |\frac{1 - (1 + x_n)^n}{(1 + x_n)^n}| \\
+% &<& |1 - (1 + x_n)^n| \quad \text{by the previous calculation} \\
+% &=& |(1 + x_n)^n - 1| =  |(1 + x_n)^n - 1^n| \\
+% &=& |(1 + x_n)^n - 1|
+%\end{eqnarray*}
+%\indent We know however that $\lim_{n \to \infty}f_n(x) = f(x)$ where $f(x) = 1$ if $x = 0$ and $f(x) = 0$ if $x \neq 0$. A theorem in rudin says that if $f_n$ are continuous and $f_n \to f$ uniformly then $f$ is continuous. The $f_n$ are continuous by hypothesis and the previous paragraphs showed that $f_n(x_n) \to f(x)$ or all $x_n \to x$. This implies that since $f$ is discontinuous, $f_n$ must not be uniformly continuous.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are given that $\{ f_n \}$ is a sequence of functions Riemann-integrable on all compact subintervals of $[0,\infty)$. It is also given that \\
+1) $f_n \to 0$ uniformly on every compact subset of $[0,\infty)$\\
+2) $0 \le f_n(t) \le e^{-t}$ for all $t \ge 0$ and $n \in \mathbb{N}$
+And we must show that:
+\begin{equation}
+\lim_{n \to \infty} \int_0^\infty f_n(t) dt = 0 \label{eqn:targetzeroconverge}
+\end{equation}
+
+We start by noting a theorem in Rudin if $f_n \to f$ uniformly on a compact interval then it is true that 
+\[ \int_a^b f(t) dt  = \lim_{n \toÊ\infty} \int_a^b f_n(t) dt \]
+We choose the arbitrary compact interval $[0,b]$ and note that $f_n \to 0$ on this interval by condition 1 above so we have
+\[ \lim_{n \toÊ\infty} \int_0^b f_n(t) dt = \int_0^b f(t) dt =  \int_0^b 0 \, dt = 0 \]
+We now point out that if $\lim_{n \to \infty} \lim_{b \to \infty} \int_0^b f(t)dt = \lim_{b \to \infty} \lim_{n \to \infty} \int_0^b f(t)dt$ then we may derive
+\begin{eqnarray*}
+ \lim_{n \to \infty} \int_0^\infty f_n(t) dt &=& \lim_{n \to \infty}  \lim_{b \to \infty} \int_0^b f_n(t) dt \\
+  &=& \lim_{b \to \infty}  \lim_{n \to \infty} \int_0^b f_n(t) dt \\
+  &=& \lim_{b \to \infty}  0 \quad \text{by the previous calculation} \\
+  &=& 0 
+ \end{eqnarray*}
+\noindent Which is the desired conclusion. \\
+We define a function as follows $F_n(b) = \int_0^b f_n(t)dt$ and note that there is a theorem in Rudin, used to show that uniform convergence preserves continuity, that says that if $F_n(b)$ is uniformly convergent in its domain $[0,\infty)$ then $lim_{n \to \infty} \lim_{b \to \infty} F_n(b) = lim_{b \to \infty} \lim_{n \to \infty} F_n(b)$. The proof of this theorem also assumes a finite limit for $\lim_{b \to \infty} F_n(b)$ for all $n$. Because $0 \le f_n(t) \le e^{-t} \implies 0 \le \int_0^\infty f_n(t)dt \le 1$ for all $n$ this satisfies the proofs assumption. If we can show that $F_n(b)$ converges uniformly for all $b \in [0,\infty)$ then we will be done.\\
+\indent We are given an $\epsilon$ for which we choose $t_0 = 0$ if $\epsilon \ge 1$ otherwise we choose $t_0$ such that $\frac{\epsilon}{2} = e^{-t_0}$. We may now calculate as follows:
+\begin{eqnarray}
+|F_n(b) - F_m(b)| &=& |\int_0^b f_n(t) dt - \int_0^b f_m(t) dt | \nonumber \\
+			   &=& |\int_0^b f_n(t) - f_m(t) dt | \nonumber \\
+			   &\le& |\int_0^\infty f_n(t) - f_m(t) dt | \nonumber \\
+			   &\le& |\int_0^\infty f_n(t) dt | \quad \text{Since $0 \le f_n(t) \implies -f_n(t) \le 0$} \nonumber \\
+			   &=& \lim_{b'' \to \infty} \left( \int_0^{b'} f_n(t) dt + \int_{b'}^{b''} f_n(t) dt \right) \label{eqn:brokenupint} 
+\end{eqnarray}
+Here we note that since $f_n(t) \to 0$ uniformly on the compact subinterval $[0,b']$ there must be an $N$ such that if $m,n > N$ we have $|f_n(t)| < \frac{\epsilon}{2 b'}$. We also let $b' = t_0$ so that $\frac{\epsilon}{2} = e^{-b'}$ when $\epsilon < 1$. We may now calculate from the expression in $(\ref{eqn:brokenupint})$
+\begin{eqnarray*}
+\lim_{b'' \to \infty} \left( \int_0^{b'} f_n(t) dt + \int_{b'}^{b''} f_n(t) dt \right) &=& \lim_{b'' \to \infty} \left( \int_0^{b'} \frac{\epsilon}{2b'} dt + \int_{b'}^{b''} f_n(t) dt \right) \\
+&=& \lim_{b'' \to \infty} \left( \frac{\epsilon}{2} + \int_{b'}^{b''} f_n(t) dt \right) \\
+&\le& \lim_{b'' \to \infty} \left( \frac{\epsilon}{2} + \int_{b'}^{b''} e^{-t} dt \right) \\
+&=& \lim_{b'' \to \infty} \left( \frac{\epsilon}{2} + e^{-b'} - e^{-b''} \right) \\
+&=& \lim_{b'' \to \infty} \left( \frac{\epsilon}{2} + \frac{\epsilon}{2} - e^{-b''} \right) \\
+&=& \epsilon - \lim_{b'' \to \infty}  e^{-b''} = \epsilon \\
+\end{eqnarray*}
+So we have shown for $\epsilon$ there exists an $N$ such that for $n,m > N$ we have $|F_n(b) - F_m(b)| < \epsilon$ for all $b \in [0,\infty)$ which shows that $F_n(b)$ converges uniformly. This completes the proof.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are given that $\{ f_n \}$ is equicontinuous on a compact set $K$. Also, given that $f_n \to f$ pointwise on $K$ show that $f_n \to f$ uniformly.\\
+By the equicontinuity of $\{ f_n \}$ for a $\epsilon$ there exists a $\delta$ such that $|x - y| < \delta$ we have
+\begin{equation} 
+|f_n(x) - f_n(y)| < \frac{\epsilon}{3} \label{eqn:equibound}
+\end{equation}
+Let $C = \{ N_\delta(x) | N_\delta(x) \; \text{is a neighborhood of radius} \; \delta \; \text{and} \; x \in K \} $. Since $x \in X$ for all $x \in K$, $C$ is a cover of $K$. By the compactness of $K$ there is a finite set of points in $K$, $X = \{ x_1, x_2, \cdots ,x_m \}$ such that $N = \{ N_\delta(x_1), N_\delta(x_2), \cdots, N_\delta(x_m) \}$ cover $K$. \\
+By the pointwise convergence, for each $x_i \in X$ there exists an $N_i$ such that for $n > N_i$ we have:
+\begin{equation}
+|f_n(x_i) - f(x_i)| < \frac{\epsilon}{3} \label{eqn:pointwisebound}
+\end{equation}
+This allows us to allows to also show by taking the limit of both sides of ($\ref{eqn:pointwisebound}$) to get
+\begin{equation}
+|f(x_i) - f(x_i)| \le \frac{\epsilon}{3} \label{eqn:pointwiselimitbound}
+\end{equation}
+If we take $\delta$ as determined above and note that since $N$ is a cover of $K$ that for any $x \in K$ it is necessary that $x \in N_\delta(x_i)$ for some $N_\delta(x_i) \in N$ .We also take $N$ = Max$(N_1,N_2,\cdots,N_m)$ for $n > N$ we have 
+\begin{eqnarray*}
+|f_n(x) - f(x)| &=& |f_n(x) - f_n(x_i) + f_n(x_i) - f(x_i) + f(x_i) - f(x)| \\ 
+		    &\le& |f_n(x) - f_n(x_i)| + |f_n(x_i) - f(x_i)| + |f(x_i) - f(x)| \\
+		    &<& \frac{\epsilon}{3} + |f_n(x_i) - f(x_i)| + |f(x_i) - f(x)| \quad \text{by $(\ref{eqn:equibound})$} \\
+		    &<& \frac{\epsilon}{3} + \frac{\epsilon}{3} + |f(x_i) - f(x)| \quad \text{by $(\ref{eqn:pointwisebound})$} \\
+		    &\le& \frac{\epsilon}{3} + \frac{\epsilon}{3} +  \frac{\epsilon}{3}  \quad \text{by $(\ref{eqn:pointwiselimitbound})$} \\
+		    &=& \epsilon
+\end{eqnarray*}
+So for any $\epsilon$ we have a $N$ such that if $n > N$ then $|f_n(x) - f(x)| < \epsilon$ for $x \in K$which says that $f_n \to f$ uniformly on $K$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+In the problem we are given sequence $f_n$ on a compact set $K$ that has the following properties:\\
+1) $f_n$ is uniformly bounded\\
+2) $f_n$ is differentiable for all $n$\\
+3) $f'_n$ is uniformly bounded \\
+We are asked to show that under these conditions there exists a convergent subsequence.
+The Arzela-Ascoli theorem will give the result if $f_n$ is continuous on a compact set (which is guaranteed by condition 2 above), $f_n$ is point wise bounded (which is guaranteed by condition 1 above), and the set $\{f_n\}$ is equicontinuous (which needs to be shown).\\
+By condition 3 there exists an $M$ such that $|f'_n(x)| \le M$ for all $n$. We are given $\epsilon$ and choose $\delta = \frac{\epsilon}{M}$. By the mean value theorem we have for $x < y$ and $|y-x| < \delta$ an $x' \in [x,y]$:
+\[ |f_n(y) - f_n(x)| = |f_n(x')(y - x)| \le |M(y-x)| = M \frac{\epsilon}{M} = \epsilon\]
+Because the bound $|f'_n(x)| \le M$ is valid for all $n$ the above calculation shows that the $\delta = \frac{\epsilon}{M}$ gives $|f_n(y)- f_n(x)| < \epsilon$ for all $n$ which shows that $\{ f_n \}$ is equicontinuous. This completes the proof.
+
+
+
+
+\end{document}  

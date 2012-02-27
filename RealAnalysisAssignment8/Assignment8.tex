@@ -1,0 +1,231 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment 8}
+\author{Andrew Rickert}
+\date{Started: June 20, 2011 \\ \hspace{1pt} Ended: October 17,  2011}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We need to show that if $f$ is continuous on $\mathbb{R}^+$ and $f(x^2) = f(x)$ for all $x \in \mathbb{R}^+$ then $f$ is constant.\\
+\indent We break the domain of the problem up into $D_1 = [0,1)$ and $D_2 = [1,\infty)$. We also need two theorems from Rudin which are:
+
+
+\begin{equation}
+\lim_{n \to \infty} p^n = 0 \quad \text{if} \; p < 1 \label{eqn:limtozero}
+\end{equation}
+
+\begin{equation}
+\lim_{n \to \infty} \sqrt[n]{p} = 1 \quad \text{if} \; p > 0 \label{eqn:limtoone}
+\end{equation}
+
+
+For any $x \in D_1$ we may form a sequence $(x^n)$, and by equation $(\ref{eqn:limtozero})$, we know that $\lim_{n \to \infty} x^n = 0$. Then, by the continuity of $f$ we have $\lim_{n \to \infty} f(x^n) = f(0)$. Now, by hypothesis we have that \\
+$f(x^2) = f(x)$, but $f(x^4) = f(x^2)$ so $f(x^4) = f(x)$. If we continue in this way we get a sequence $(f(x^{2n}))$ such that $f(x^{2n}) = f(x)$ for all $n \in \mathbb{N}$. By the previous comments we get $f(x) = \lim_{n \to \infty} f(x^{2n}) = f(0)$.\\
+\indent Now suppose that $x \in D_2$. Since $1 \le x \implies x \le x^2 \implies \sqrt{x} \le x$ we reconsider the relation $f(x^2) = f(x)$. Let $y \in D_2$ then let $y = x^2$ then we have $f(y) = f(\sqrt{y})$ for any $y \in D_2$. By reapplying the relation to a $y \in D_2$ we get a sequence $(f(\sqrt[2n]{y}))$ and by $(\ref{eqn:limtoone})$ we can again use continuity to say that $f(y) = \lim_{n \to \infty}f(\sqrt[2n]{y}) = f(1)$. \\
+\indent We have shown that $f(x)= f(0)$ if $x \in D_1$ and $f(x)= f(1)$ if $x \in D_2$. By the continuity of $f$ we know that we must have $\lim_{x \to 1}f(x) = f(1)$. If $f(0) \neq f(1)$ then since the left hand limit is $\lim_{x \to 1}f(x) = f(0)$ and the right hand limit is $\lim_{x \to 1}f(x) = f(1)$ the function is discontinuous contrary to hypothesis. So we have shown that $f(x) = f(1)$ for all $x \in \mathbb{R}^+$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+Given that $f$ is defined for $x > 0$ and differentiable and $f'(x) \to 0$ as $x \to \infty$ show that \\
+$g(x) = f(x+1) - f(x)$ has the property that $g(x) \to 0$.  \\
+\indent The proof is based on the mean value theorem which states that there exists an $x' \in (a,b)$ such that $f(b)-f(a) = f'(x')(b-a)$. If we let $a = x$ and $b = x+1$ then we get 
+\[ g(x) = f(x+1) - f(x) = f'(x')(x+1 - x) = f'(x') \]
+Since $x' \in (x,x+1)$ for all $x$ we have $x < x'$ so 
+\[ \lim_{x \to \infty} g(x) = \lim_{x \to \infty} f'(x')  =   \lim_{x' \to \infty} f'(x') = 0\]
+
+\newpage
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are being asked to show that the following equation has at least one root between 0 and 1:
+\[ C_0 + C_1 x + \cdots + C_{n-1} x^{n-1} + C_n x^n = 0 \] 
+ given that 
+ \begin{equation} 
+ C_0 + \frac{C_1}{2} + \cdots +\frac{C_{n-1}}{n} + \frac{C_n}{n+1}  = 0 \label{eqn:dercond}
+ \end{equation}
+ 
+ \noindent Given the form of $(\ref{eqn:dercond})$ we will use an auxiliary function to solve the problem. Consider the function:
+ 
+ \begin{equation} 
+ g(x) = C_0 x + C_1 \frac{x^2}{2} + \cdots + C_{n-1} \frac{x^n}{n} + C_n \frac{x^{n+1}}{n+1} \label{eqn:auxfunc}
+ \end{equation}
+ 
+\noindent It is clear from the definition of $(\ref{eqn:auxfunc})$ that $g(0) = 0$ and also obviously the case that $g(1) = 0$ by $(\ref{eqn:dercond})$. From the mean value theorem we know that there exists $x \in (a,b)$ such that $f(b) - f(a) = f'(x)(b-a)$. Letting $a = 0$ and $b = 1$ we get that there is a $x \in (0,1)$ such that $0 = g(1)-g(0)  = g'(x)(1 - 0) = g'(x)$. We know however that 
+\[ g'(x) =  C_0 + C_1 x + \cdots + C_{n-1} x^{n-1} + C_n x^n \]
+so x is the desired root.
+ 
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Part a) We need to show that there is at most one fixed point given that $f'(t) \neq 1$ for all $t \in \mathbb{R}$\\
+\indent  Suppose there is more than one fixed point and let $x_0$ and $x_1$ be these fixed points.  By the mean value theorem there exists an $x \in (x_0,x_1)$ such that 
+\begin{equation}
+ f(x_1) - f(x_0) = f'(x)(x_1-x_0) \label{eqn:fixderiv}
+ \end{equation}
+However, since we have $f(x_0) = x_0$ and $f(x_1) = x_1$ equation $(\ref{eqn:fixderiv})$ gives
+\[ f'(x) = \frac{f(x_1)-f(x_0)}{x_1-x_0} = \frac{x_1-x_0}{x_1-x_0} = 1\]
+This is a contradiction, so there may be at most one fixed point.\\
+
+\noindent Part b) We would like to show that $f(t) = t + (1+e^t)^{-1}$ has no fixed point eventhough $0 < f(t) < 1$ for all $t$.
+
+If we have a fixed point then $f(t) = t$ by definition. So we have
+\begin{equation}
+t = t + (1+e^t)^{-1} \implies 0 = (1+e^t)^{-1} 
+\end{equation}
+
+Since $e^t > 0$ for all $t$ we must have $1+e^t > 0$ for all $t$. This says if there exists a $t$ satisfying the equation about we may multiply the above by $1+e^t$ to get $0 = 1$ which is a contradiction.\\
+
+\noindent Part c) For the final part we must show that a fixed point of $f$ exists if $|f'(t)| \le A < 1$ for all $t$. We must also show that the sequence defined by $x_{n+1} = f(x_n)$ with arbitrary $x_1$ converges to the fixed point.\\
+
+For the first half we start by defining a function $g(t) = t - f(t)$. If $g(t_0) = 0$ then we are done so let's assume that at some $t_1$ we have $g(t_1) < 0 $. By hypothesis we have $f'(t) < A$ for all $t$ so let $\epsilon = 1 - A > 0$. From these observations we derive the following:
+\begin{equation}
+g'(t) = 1 - f'(t) > 1 - A = \epsilon > 0 \hspace{15pt} \text{for all t}
+\end{equation}
+
+\noindent Now let $t_2 = t_1 - \frac{g(t_1)}{\epsilon}$ and note that the mean value theorem says there is a $t \in (t_1, t_2)$ such that 
+\begin{eqnarray*}
+g(t_2)-g(t_1) &=& g'(t)(t_2-t_1) \\
+		     &>& \epsilon (t_2 - t_1) \\
+		     &=& \epsilon(t_1 - \frac{g(t_1)}{\epsilon} - t_1) \\
+		     &=& -g(t_1)
+\end{eqnarray*}
+
+So we have $g(t_2)-g(t_1) > -g(t_1) \implies g(t_2) > 0$. This gives $t_1, t_2$ such that $g(t_1) < 0 < g(t_2)$. By the continuity of $g$, being the difference of $f(t)$ and $t$ which are both continuous, we may apply a theorem in rudin that says: If $f(a) < x < f(b)$ and $f$ is continuous there exists a $x \in (a,b)$ such that $f(x) = c$. Therefore we have a $t' \in (t_1,t_2)$ such that $g(t') = 0$ so $t'$ is a fixed point.\\
+\indent The analysis is similar with if we start with a $t_2$ such that $g(t_2) > 0$. We repeat the analysis by letting $t_1 = t_2 - \frac{g(t_2)}{\epsilon}$.\\
+\indent The second part of the problem requires that we show that the sequence $x_{n+1} = f(x_n)$ converges to the fixed point. There is at least one fixed point by the argument in the first part of the is problem. There is at most one fixed point by part a of this problem.\\
+\indent Let $x$ be the fixed point and note again that $0 < |f(t)| \le A < 1$ for all $t \in \mathbb{R}$. We may derive the following from the sequence which assumes an arbitrary $x_1$:
+\begin{eqnarray*}
+|x_2 -x| &=& |f(x_1)-f(x)|  \quad \text{By the definition of the sequence and of the fixed point} \\
+	   &=& |f'(x'_0)(x_1-x)| \quad \text{By the mean value theorem} \\ 
+	   &\le& A |(x_1-x)| \quad \text{By the definition of $A$}
+\end{eqnarray*}
+Repeating the analysis for the next element in the sequence:
+\begin{eqnarray*}
+|x_3 -x| &=& |f(x_2)-f(x)|  \quad \text{By the definition of the sequence and of the fixed point} \\
+	   &=& |f'(x'_1)(x_1-x)| \quad \text{By the mean value theorem} \\ 
+	   &\le& A |(x_2-x)| \quad \text{By the definition of $A$} \\
+  	   &\le& A^2 |(x_1-x)| \quad \text{From the previous derivation} \\
+\end{eqnarray*}
+This shows the pattern which can be easily shown by induction that
+\begin{equation*}
+|x_n-x| \le A^{n-1}|(x_1-x)|
+\end{equation*}
+Since $A < 1$ a theorem in Rudin says that $\lim p^n \to 0$ if $0 < p < 1$ so $x_n \to x$ by comparison.
+
+\newpage
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+The goal of this problem is to establish that if $f$ is continuous, $f'$ exists for all $x \neq 0$, and \\$\lim_{t \to 0}f'(t) \to 3$ then $f'(0)$ exists.\\
+\indent If we let:
+\[\phi(t) = \frac{f(t) - f(0)}{t - 0}\]
+Then we may show the result if we can show that left and right hand limits, $\phi(0^-)$ and $\phi(0^+)$ respectively, are equal.\\
+\indent Consider a sequence $t_n$ such that $t_n \in (0,\infty)$ and $\lim_{n \to \infty}t_n = 0$. For each $t_n$ there exists by the mean value theorem an $x \in (0,t_n)$ such that
+\[ f(t_n) - f(0) = f'(x)(t_n - 0)\]
+Thus we have
+\begin{eqnarray*}
+\phi(0^+) &=& \lim_{n \to \infty} \frac{f(t_n) - f(0)}{t_n - 0} \\
+	       &=& \lim_{t \to 0^+} f'(x) \\
+      	       &=& \lim_{x \to 0^+} f'(x) \quad \text{Since x $\in$ (0,$t$) for all $t$}\\
+	       &=& 3 \quad \text{By the hypothesis that $\lim_{t \to 0}f(t) \to 3$}
+\end{eqnarray*}
+
+If we chose another sequence $t'_n$ such that $t'_n \in (-\infty,0)$ and $\lim_{n \to \infty}t'_n = 0$
+then we repeat the argument above to show that $\phi(0^-) = 3$. Since $\phi(0^-) = \phi(0^+) = 3$ this shows that $f'(0)$ exists and $f'(0) = 3$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are given that $f$ is a real function on $[a,b]$ and that $f^{(n-1)}$ is continuous. We also are given that for $x \in (a,b)$ we have $f'(x_0) = f''(x_0) = \cdots = f^{(n-1)}(x_0) = 0$ and we are asked to show that if $n$ is even and $f^{(n)}(x_0) = A \neq 0$ then $f$ has a minimum at $x_0$ if $A > 0$ and a maximum if $A < 0$. If $n$ is not even then $f$ does not have either a minimum or a maximum at $x_0$.\\
+\indent Taylors theorem says that if we let
+\begin{equation} 
+P(t) = \sum^{n-1}_{k=0}\frac{f^{(k)}(\alpha)}{k!}(t - \alpha)^k \quad \text{where $\alpha \in (a,b)$ } \label{eqn:polynom}
+\end{equation}
+then if $\beta \in (a,b)$ then for a given $\beta$ there exists $x \in (\alpha,\beta)$ such that
+\begin{equation} 
+f(\beta) = P(\beta) + \frac{f^{(n)}(x)}{n!} (\beta-\alpha)^n \label{eqn:taylorrelate}
+\end{equation}
+assuming that $f^{(n-1)}$ is continuous and that $f^{(n)}$ exists for every $t \in (a,b)$.\\
+\indent Letting $\alpha = x_0$ and applying the hypotheses of the problem to talyors theorem yields from $(\ref{eqn:polynom})$ that $P(t) = f(x_0)$ for all $t$. If we now substitute into equation $(\ref{eqn:taylorrelate})$ this fact we get the relation
+\[ f(\beta) = f(x_0) + \frac{f^{(n)}(x)}{n!} (\beta-x_0)^n \]
+We may rewrite this last expression as:
+\begin{equation}
+f^{(n)}(x) = n! \frac{f(\beta) - f(x_0)}{(\beta-x_0)^n} \label{eqn:lhospdef}
+\end{equation}
+We know that $f^{(n)}(x_0) = A$ we would like to show that $\lim_{\beta \to x_0} f^{(n)}(x) = A$. We apply L'Hospital's theorem $n-1$ times to $(\ref{eqn:lhospdef})$ we get
+\[ \lim_{\beta \to x_0}  n! \frac{f(\beta) - f(x_0)}{(\beta-x_0)^n}  =  \lim_{\beta \to x_0}\frac{f^{(n-1)}(\beta) }{\beta-x_0} \]
+Because $f^{(n-1}(x_0) = 0$ we may substitute it into the previous expression to get
+\[ \lim_{\beta \to x_0}  n! \frac{f(\beta) - f(x_0)}{(\beta-x_0)^n}  = \lim_{\beta \to x_0} \frac{f^{(n-1)}(\beta) - f^{(n-1)}(x_0) }{\beta-x_0} = f^{(n)}(x_0) = A \]\\
+\indent First we assume that $A > 0$ and $n$ is even. Since we now have $\lim_{\beta \to x_0} f^{(n)}(x) = A$ we can pick an $\epsilon$ such that $A - \epsilon > 0$ and because the limit exists we have a neighborhood $N(x_0)$ such that $f^{(n)}(x_0) > 0$. Therefore in $N(x_0)$ it is true that 
+\[ f(\beta) - f(x_0) = \frac{f^{(n)}(x)}{n!} (\beta- x_0)^n  > 0 \quad \text{since $(\beta - x_0)^n > 0$}\]
+This implies that $f(\beta) > f(x_0)$ for $\beta \in N(x_0)$ which says that we have a minimum.\\
+\indent For the case where $A < 0$ we pick a $\epsilon$ such that $A + \epsilon < 0$ and there exists such a neighborhood of radius $\epsilon$ by the existence of the limit. We repeat the argument above to show that  $f(\beta) < f(x_0)$ which shows that we have a maximum.\\
+\indent In the case that $n$ is odd then $(\beta - x_0)^n > 0$ when $\beta > x_0$ and $(\beta - x_0)^n < 0$
+when $\beta < x_0$ so there can be no maximum or minimum at $x_0$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are given the function $f(x) = |x|^3$ and first asked to show that $f'(x)$ and $f''(x)$ exist for all $x$. We also need to show that $f'''(0)$ does not exist.
+
+For $x > 0$ we may write $f(x) = |x|^3$ as $f(x) = x^3$. So for positive values we have $f'(x) = 3 x^2$. Similarly for  $x < 0$ we have $f(x) = |x|^3 = - x^3$ which gives $f(x) = -3 x^2$. We calculate the derivative at zero from the definition
+\[ f'(0) = \lim_{t \to 0}\frac{f(t) - f(0)}{t} = \lim_{t \to 0} \frac{|t|^3}{t} = \lim_{t \to 0} \frac{t|t|^2}{t} = \lim_{t \to 0} |t|^2 = 0 \]
+We can proceed similarly for the second derivative and get $f''(x) = 6 x$ for $x > 0$ and $f''(x) = - 6 x$ for $x < 0$. We now repeat the calculation above to see that 
+\[ f''(0) = \lim_{t \to 0}\frac{f'(t) - f'(0)}{t} = \lim_{t \to 0} \frac{3 t |t|}{t} = \lim_{t \to 0} 3|t|  = 0 \]
+\indent This says that both the first and second derivatives exist. Repeating the procedure a final time we see that third derivative is $f'''(x) = 6$ for $x > 0$ and $f'''(x) = -6$ for $x < 0$. This time we get
+\[ f'''(0) = \lim_{t \to 0}\frac{f''(t) - f''(0)}{t} = \lim_{t \to 0} \frac{6|t|}{t} \]
+since we have $6 = f'''(0^+) \neq f'''(0^-) = -6$ the derivative $f'''(0)$ does not exist.
+%\vspace{15pt}
+%\begin{flushleft} 
+%\textbf{Class 18.100B} - Extra Problem 1\\
+%\rule{500pt}{1pt}\\
+%\end{flushleft} 
+
+
+\end{document}  

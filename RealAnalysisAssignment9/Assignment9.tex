@@ -1,0 +1,265 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment 9}
+\author{Andrew Rickert}
+\date{Started: October 17, 2011 \\ \hspace{1pt} Ended: December 31,  2011}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are given two sequences of functions $f_n(x) = \frac{1}{nx + 1}$ and $g_n(x) = \frac{x}{nx+1}$ for $n \in \mathbb{N}$. We would like to show that $g_n$ converges uniformly on (0,1) but $f_n$ only converges pointwise.
+
+To show that $f_n$ converges pointwise to 0 we only need to note that for each $x \in (0,1)$ we have the following relationship:
+\[ f_n = \frac{1}{nx + 1} \le \frac{1}{nx}\]
+Since it is know that $\lim_{n \to \infty} c s_n = c s$ assuming that $\lim_{n \to \infty}s_n = s$ we have that $\lim_{n \to \infty} f_n = 0$ for each $x$. To show uniform convergence on the other hand we need to find an $\epsilon$ such that $|f_n| \le \epsilon$ for \emph{all} $x \in (0,1)$. If we let $\epsilon = \frac{1}{4}$ then $f_N(\frac{1}{N}) = \frac{1}{2}$ so there is always a $x = \frac{1}{N}$ that violates the requirement for uniform continuity.
+
+\indent We only need to show uniform convergence for $g_n$ since this implies pointwise convergence as well. As the following calculation shows
+\[ g_n = \frac{x}{nx+1} \le \frac{x}{nx} = \frac{1}{n} \]
+we can take $M_n = \frac{1}{n}$ in the Weierstrauss M-test which gives us the uniform convergence of $g_n$.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are given the function sequence $f_n(x) = \frac{x}{1+nx^2}$ for $x \in \mathbb{R}$ and $n \in \mathbb{N}$. We need to find or show the following about $f_n$:\\
+1) Find the limit function $f$ of $f_n$\\
+2) Find the limit function $g$ of $f'_n$\\
+3) Show $f'(x)$ exists for all $x \in \mathbb{R}$ but $f'(0) \neq g(0)$\\
+4) Find the values of $x$ such that $f'(x) = g(x)$\\
+5) Find the subintervals of $\mathbb{R}$ where $f_n \to f$ uniformly\\
+6) Find the subintervals of $\mathbb{R}$ where $f'_n \to g$ uniformly\\
+
+\noindent 1) We break up the pointwise convergence of $f_n$ into the subintervals $(-\infty,0),\{0\},(0,\infty)$. We have $f_n(0) = 0$ for all $n \in \mathbb{N}$ so the limit is $f(0) = 0$. For the subinterval $(0,\infty)$ we have the following 
+\[ f_n = \frac{x}{1+ nx^2} \le \frac{x}{nx^2} = \frac{1}{nx}\]
+so we have $\lim_{n \to \infty} f_n \to 0$ for $x \in (0,\infty)$. For $x \in (-\infty,0)$ we have \[ \lim_{n \to \infty} f_n(x) = - \lim_{n \to \infty} f_n(-x) \to 0 \] since $-x \in (0,\infty)$.
+
+\noindent 2) We start by calculating $f'_n$ as 
+\[ f'_n = \frac{1-nx^2}{(1+nx^2)^2} \]
+It is clear from substitution that $f_n(0) = 1$ for all $n \in \mathbb{N}$. The following calculation shows the value of $g$ for $x \in \mathbb{R}$ \textbackslash\{0\}:
+
+\begin{eqnarray*}
+\lim_{n \to \infty}  \frac{1-nx^2}{(1+nx^2)^2} &=& \lim_{n \to \infty} \frac{1}{(1+nx^2)^2}  -  \lim_{n \to \infty} \frac{nx^2}{(1+nx^2)^2} \\
+&=& \lim_{n \to \infty} \frac{1}{(1+nx^2)^2}  -  \lim_{n \to \infty} \frac{nx^2}{1+2n x^2+n^2 x^4}\\
+&=& 0 - 0 = 0
+\end{eqnarray*}
+
+\noindent So we have $g(0) = 1$ and $g(x) = 0$ for $x \in \mathbb{R}$ \textbackslash\{0\}.
+
+\noindent 3) Since $f(x) = 0$ for all $x \in \mathbb{R}$ we have $f'(x) = 0$ for all $x$. Because $g(0) = 1$ as was shown in part 2 we have $f'(0) \neq g(0)$.
+
+\noindent 4) $x = 0$ is the only point at which $f'$ and $g$ disagree so $f' = g$ for $x \in \mathbb{R}$ \textbackslash \{0\}.
+
+\noindent 5) We show that the $f_n$ is uniformly convergent from the definition of uniform convergence.\\
+\indent First we assume that $|x| < \epsilon$. We have therefore $|x| < \epsilon < \epsilon |1 + n x^2|$ for all $n \in \mathbb{N}$. This gives $|\frac{x}{1+nx^2}| < \epsilon$ for all $n$ so that $N$ may be chosen arbitrarily.\\
+\indent Now we assume that $\epsilon \le |x|$. So we have $\frac{1}{|x|} < \frac{1}{\epsilon}$ and if we let $N > \frac{1}{\epsilon^2}$ then for $n > N > \frac{1}{\epsilon^2}$ so $ \frac{1}{n} < \epsilon^2$ and we have
+\[ |\frac{x}{1 + nx^2}| < |\frac{x}{nx^2}| < |\frac{1}{nx}| < \frac{1}{n\epsilon} <  \frac{1}{\epsilon} \epsilon^2\ = \epsilon \]
+This shows for all $\epsilon$ if we pick $N > \frac{1}{\epsilon^2}$ then for $n > N$ it is true that 
+$|\frac{x}{1+nx^2}| < \epsilon$ so $f_n \to 0$ uniformly.\\
+6) From part 2 we have the result that $f_n' = \frac{1- nx^2}{(1+nx^2)^2}$. Since $f_n'(\frac{1}{\sqrt{2n}}) = \frac{2}{9}$ it is clear that any interval that has $x = 0$ is a limit point will not be uniformly convergent.\\
+\indent We now suppose that $0 < \epsilon \le x$. If we let $N  > \frac{1}{\epsilon^3}$ then for $n > N > \frac{1}{\epsilon^3}$ we have the following calculation:
+\[ |\frac{1-nx^2}{(1+nx^2)^2}| <  |\frac{1 + nx^2}{(1+nx^2)^2}| = |\frac{1}{1 + nx^2}| < |\frac{1}{nx^2}| <  \frac{1}{n\epsilon^2} < \frac{1}{\epsilon^2} \epsilon^3 = \epsilon \]
+This shows that $f_n' \to g$ uniformly for any interval which does not have zero as limit point
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+We would like to show that if $f_n \to f$ uniformly and each $f_n$ is bounded then $f_n$ is uniformly bounded and $f$ is bounded. We also will provide an example that $f$ need not be bounded if $f_n$ is not uniformly convergent.\\
+\indent By the cauchy characterization of uniform convergence there exists an $N$ such that 
+\[ | f_n(x) - f_m(x) | < \epsilon \text{ for n,m $ > N$ and $x \in E$} \] 
+If we fix $m = N+1$ and $\epsilon$ and use the triangle equality we get 
+\begin{equation}
+|f_n(x)| - |f_m(x)| < \epsilon \implies |f_n(x)| < |f_m(x)| + \epsilon \label{eqn:cauchybound}
+\end{equation}
+Because $f_m$ is bounded we have $|f_m| < M$ so $|f_n(x)| < M + \epsilon$ by ($\ref{eqn:cauchybound}$) for all $n > N$. Because $f_n$ is bounded for each $n$ we choose $B =$ Max$\{B_1,B_2,\cdots,B_{N-1},B_{N},M + \epsilon\}$ where $B_1$ is the bound for $f_1$, $B_2$ for $f_2$ and so on. It is clear from construction then that $|f_n| < B$ for $n \in \mathbb{N}$ which is the definition of uniform boundedness. \\ 
+\indent Because $f_n$ is uniformly convergent we fix $\epsilon$ and the following calculation shows that $f$ is bounded:
+\[ \text{For $n > N $} |f-f_n| < \epsilon \implies |f|-|f_n| < \epsilon \implies |f| < \epsilon + |f_n| < \epsilon + B \]
+\indent Finally, if we let $f_n(x) = \frac{1}{x + \frac{1}{n}}$ on $(0,1)$ then $\lim_{n \to \infty} f_n = \frac{1}{x}$ which is clearly unbounded on $(0,1)$. It is also clear that $f_n$ converges point wise and that $f_n < n$ for all $n \in \mathbb{N}$. This shows that we can have bounded functions converge to an unbounded function if we do not have uniform convergence.
+ 
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We would like to show first that if $f_n \to f$ and $g_n \to g$ uniformly on $E$ then $f_n + g_n \to f + g$ uniformly on $E$. We also want to show that if each $f_n$ and each $g_n$ is bounded on $E$ then $f_n g_n \to fg$ uniformly.
+Since $f_n$ and $g_n$ converge uniformly then there exists $N_1$ and $N_2$ such that $|f_n - f | < \frac{\epsilon}{2}$ and $|g_n - g | < \frac{\epsilon}{2}$ for $n > N_1$ and $n > N_2$ respectively. We let $N = $ Max$\{N_1,N_2\}$ and get 
+\[ |f_n + g_n - (f+g)| = |f_n - f + g_n - g| < |f_n - f| + |g_n - g| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon \]
+This shows the first part.\\
+\indent Since we are given that $f_n$ and $g_n$ are bounded for each $n$ as well as being uniformly convergent we can apply the result of problem 3 to conclude that both $f_n$ and $g_n$ are uniformly bounded. So we have $|g_n| < G$ for $n \in \mathbb{N}$. We also know from the previous problem that $f$ is bounded so we have $|f| < F$ for all $x \in E$. We perform the calculation as follows. Since $f_n$ and $g_n$ are uniformly convergent there exists $N_1$ and $N_2$ respectively such that for $n > N_1,N_2$
+\begin{eqnarray*}
+|f_n - f| &\le& \frac{\epsilon}{2G} \\
+|g_n - g| &\le& \frac{\epsilon}{2F}
+\end{eqnarray*}
+We take $N = $ Max$\{ N_1, N_2\}$ so that both inequalities hold and calculate
+\begin{eqnarray*}
+ |f_n g_n - f g| &=& |f_n g_n - f g_n + f g_n - f g| \\
+ 		       &=& |g_n(f_n - f) + f (g_n - g)| \\ 
+		       &\le&  |g_n||f_n - f| + |f||g_n-g| \\
+		       &<& G|f_n - f| + F |g_n-g| \\
+		       &\le& G \frac{\epsilon}{2G} + F \frac{\epsilon}{2F} = \epsilon
+\end{eqnarray*}
+So $ |f_n g_n - f g| < \epsilon $ for all $n > N$ and $f_n g_n \to fg$ uniformly.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We are given the following sequences 
+\begin{eqnarray*}
+ f_n(x) &=& x(1 + \frac{1}{n}) \\
+ g_n(x) &=& \left\{
+	\begin{array}{ll}
+		\frac{1}{n}  & \mbox{if } x \in \mathbb{R} \text{\textbackslash} \mathbb{Q} \\
+		q + \frac{1}{n} & \mbox{if } x \in \mathbb{Q} \text{ and } x = \frac{p}{q}
+	\end{array}
+\right.
+\end{eqnarray*}
+It is clear that the point wise limits of these sequences are 
+\begin{eqnarray*}
+ f(x) &=& x\\
+ g(x) &=& \left\{
+	\begin{array}{ll}
+		0 & \mbox{if } x \in \mathbb{R} \text{\textbackslash} \mathbb{Q} \\
+		q & \mbox{if } x \in \mathbb{Q} \text{ and } x = \frac{p}{q}
+	\end{array}
+\right.
+\end{eqnarray*}
+
+For any bounded interval $[a,b]$ we have $x \le b$. This allows us to chose $N > \frac{b}{\epsilon}$ so that if $n > N$ we have
+\[ |f_n(x) - f(x) | < \frac{x}{n} < \frac{b}{n}  < b \frac{\epsilon}{b} = \epsilon \]
+Similarly we choose $N > \frac{1}{\epsilon}$ so if  $n > N$ to show that 
+\[ |g_n(x) - g(x)| < \frac{1}{n} < \epsilon \]
+so that both $f_n \to f$ and $g_n \to g$ uniformly.
+Now consider the following function:
+\begin{eqnarray*}
+|f_n(x)g_n(x) - f(x)g(x)| &=& \left\{
+	\begin{array}{ll}
+		| \frac{x}{n}(1 + \frac{1}{n}) | & \mbox{if } x \in \mathbb{R} \text{\textbackslash} \mathbb{Q} \\
+		| \frac{xq}{n} + \frac{x}{n} + \frac{x}{n^2} | & \mbox{if } x \in \mathbb{Q} \text{ and } x = \frac{p}{q}
+	\end{array}
+\right.
+\end{eqnarray*}
+
+If we let $B = $ Min $\{ |a|,|b| \}$ then we get 
+\begin{eqnarray}
+| \frac{xq}{n} + \frac{x}{n} + \frac{x}{n^2} | &\ge& |\frac{Bq}{n} + \frac{B}{n} + \frac{B}{n^2}| \nonumber \\
+ \implies | \frac{xq}{n} + \frac{x}{n} + \frac{x}{n^2} | &>& |\frac{Bq}{n}| \label{eqn:lowbound}
+\end{eqnarray}
+
+By the density of the rationals we know that on any given interval $[a,b]$ there is an $r \in \mathbb{Q}$ such that $r \in (a,b)$. We chose such a $r$ and note that since $lim_{n \to \infty} r + \frac{1}{n} = r$ we pick $\epsilon = $ Min $\{ |r-a|, |r-b| \}$ and there is an $N$ such that for $n > N$ we have $r + \frac{1}{n} \in [a,b]$. This is to say that after a certain point $N$ we can be sure that all the elements of the sequence $r-\frac{1}{n}$ are contained in the interval.\\
+\indent We let $r = \frac{p'}{q'}$ which gives for the sequence $r - \frac{1}{n} = \frac{np' - q'}{q'n}$. So if we pick $N_1 = $ Max$\{n,N\}$ then we have $q =  q'n$ in ($\ref{eqn:lowbound}$) which gives
+\[ | \frac{xq}{n} + \frac{x}{n} + \frac{x}{n^2} | > |\frac{Bq'N_1}{n}| > Bq' \quad \text{for all $n \in \mathbb{N}$ }\]
+This shows that $f_n g_n$ does not converge uniformly.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We would like to show that $g \circ f_n \to g \circ f$ uniformly given that $f_n \to f$ uniformly and $f_n$ is uniformly bounded.\\
+Since $f_n$ is uniformly convergent, for any $\delta$ there exists an $N$ such if $n > N$ then 
+\[  |f_n(x) - f(x)| < \delta \text{ for all $x \in E$} \]
+Let $M$ be a uniform bound of $f_n$ then note that because $g$ is continuous on $[-M,M]$ it is uniformly continuous. By the uniform continuity of $g$ we know that for a given $\epsilon$ that if $|f_n(x) - f(x)| < \delta $ and $f_n(x),f(x) \in [-M,M]$ then it is true that 
+\[ |g(f_n(x)) - g(f(x))| < \epsilon \]
+This says that for all $\epsilon$ there exists an $N$ such that if $x \in E$ and $n > N$ then 
+\[ |g \circ f_n(x) - g \circ f(x)| < \epsilon \]
+this says that $g \circ f_n \to g \circ f$ uniformly.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent We want to show \\
+a) If $P_n(x)$ is defined as
+\begin{eqnarray*}
+P_0(x) &=& 0 \\
+P_{n+1}(x) &=& P_n(x) + \frac{1}{2} (x - P_n^2(x))
+\end{eqnarray*}
+then $P_n(x) \to \sqrt{x}$ uniformly. \\
+
+b) There exists a sequence of polynomials that converges uniformly on $[-1,1]$ to $f(x) = |x|$
+
+For part a) first we note that $P_n$ defines a sequence of polynomials. This is true since as a basis for induction $P_0$ is a trivial polynomial. For the induction step we note that because a product of a polynomial and a polynomial is a polynomial (by the binomial theorem) then $P_n^2$ is also a polynomial. This means the expression $P_n(x) + \frac{1}{2}x-\frac{1}{2}P_n^2(x)$ is a sum of polynomials showing that $P_{n+1}$ is a polynomial.\\
+\indent So $P_n$ is a sequence of continuous function that we now show converges point wise.\\
+\indent We show $\sqrt{x} \ge P_n(x)$ for $ x \in [0,1]$ inductively. The inequality is trivially true for $\sqrt{x} \ge 0 = P_0(x)$. Now assume that $\sqrt{x} \ge P_n(x)$. This allows us to assume that
+\begin{equation}
+\sqrt{x} - P_n(x) \ge 0 \label{eqn:firstpolyineq}
+\end{equation}
+and also
+\begin{eqnarray}
+\sqrt{x} \ge P_n(x) &\implies& \sqrt{x} + \sqrt{x} \ge \sqrt{x} + P_n(x) \nonumber \\
+			    &\implies& 2 \sqrt{x} \ge \sqrt{x} + P_n(x) \nonumber \\
+			    &\implies& \sqrt{x} \ge \frac{1}{2}( \sqrt{x} + P_n(x) ) \nonumber \\
+			    &\implies& \sqrt{x} - \frac{1}{2}( \sqrt{x} + P_n(x) ) \ge 0 \nonumber\\
+			    &\implies& 1 - \frac{1}{2}( \sqrt{x} + P_n(x) ) \ge 0 \quad \text{since $x \in$ [0,1] $\implies 1 \ge \sqrt{x}$ } \label{eqn:secondpolyineq}
+\end{eqnarray}
+
+\noindent Now we perform the following calculation:
+\begin{eqnarray*}
+\sqrt{x} - P_{n+1}(x) &=& \sqrt{x} - P_n(x) - \frac{1}{2}(x - P_n^2(x))\\
+			       &=& \sqrt{x} - P_n(x) - \frac{1}{2}(\sqrt{x} - P_n(x))(\sqrt{x} + P_n(x))\\
+			       &=& (\sqrt{x} - P_n(x))(1 - \frac{1}{2}(\sqrt{x} + P_n(x)))\\
+			       &\ge& 0 \quad \text{by equations (\ref{eqn:firstpolyineq}) and (\ref{eqn:secondpolyineq})}
+\end{eqnarray*}
+This shows that $\sqrt{x} \ge P_{n+1}(x)$ which completes the induction.\\
+Now since $\sqrt{x} \ge P_n(x)$ for all $n$ we have $x > P_n^2(x) \implies x - P_n^2(x) \ge 0$ for all $n$.  This allows us to show that $P_n$ is increasing since 
+\begin{eqnarray*}
+&& P_{n+1}(x) = P_n(x) + \frac{1}{2} (x - P_n^2(x)) \\
+&\implies& P_{n+1}(x) - P_n(x) = \frac{1}{2} (x - P_n^2(x))  \\ 
+&\implies & P_{n+1}(x) - P_n(x) \ge 0 \quad \text{by the previous comments}
+\end{eqnarray*}
+We have shown that for a give $x$ $P_n(x)$ is increasing and bounded. By a theorem in rudin this means that $P_n$ converges. This allows to calculate as follows which demonstrates the point wise convergence
+\begin{eqnarray*}
+&& \lim_{n \to \infty} P_{n+1}(x) = \lim_{n \to \infty} P_n(x) + \frac{1}{2} (x - \lim_{n \to \infty} P_n^2(x))\\
+&\implies& P(x) = P(x) + \frac{1}{2} (x - P^2(x)) \\
+&\implies& 0 = \frac{1}{2} (x - P^2(x)) \\ 
+&\implies& \sqrt{x} = P(x)
+\end{eqnarray*}
+
+\indent We now briefly consider the set of polynomials defined by $P'_n(x) = 1 - P_n(x)$. Since $P_n$ converges point wise so does $P'_n$ by a basic property of limits. However since $P_{n+1}(x) \ge P_n(x)$ we have \\$P'_{n+1}(x) = 1 - P_{n+1}(x) \le 1 - P_n(x) = P'_n(x)$. This shows that $P'_n$ is a decreasing sequence. By a theorem in rudin, if the functions in a sequence of functions on a compact set are continuous, limit to a continuous function and are decreasing then the sequence uniformly converges. So $\lim P'_n \to 1 - \sqrt{x}$ uniformly but then for $\epsilon$ there exists $N$ such that if $n > N$ we have 
+\begin{eqnarray*} 
+&& |P'_n(x) - (1 - \sqrt{x})| < \epsilon \\
+&\implies& |1 - P_n - (1 - \sqrt{x})| < \epsilon \\
+&\implies& |P_n - \sqrt{x}| < \epsilon
+\end{eqnarray*}
+so $P_n \to \sqrt{x}$ uniformly. \\
+
+\noindent For part b) we note that the function $f(x) = x^2$ is such that $f : [-1,1] \to [0,1]$. By part a the sequence of polynomials $P_n(x) \to \sqrt{x}$ uniformly. Since $P_n(x)$ is a polynomial for all $n$ so is $P_n(x^2)$. So we have $P_n \circ f : [-1,1] \to [0,1]$ and $P_n \circ f(x) = P_n(f(x)) = P_n(x^2) \to \sqrt{x^2} = |x|$ which satisfies the required conditions.
+
+
+
+\end{document}  

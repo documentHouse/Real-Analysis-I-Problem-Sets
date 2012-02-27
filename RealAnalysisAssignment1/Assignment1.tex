@@ -1,0 +1,144 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Real Analysis $\mathbb{I}$: \\ Assignment \,1 (Needs Revision)}
+\author{Andrew Rickert}
+\date{Started: November 19, 2010 \\ \hspace{1pt} Ended: November 29, 2010}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 1\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+	We have to prove that there is no rational number whose square is 12. In other words we are set to prove that the square root of 12 is irrational. 
+	
+First we note that the product of an rational $r$ and an irrational $i$ is irrational for suppose that their product was a rational $p$. Then $r \cdot i = p$ but since $\mathbb{Q}$ is a field we can take the inverse of the rational, which would be a rational to get $i = r^{-1} \cdot p$. Since the right hand side is the product of rationals we get another rational which implies the rationality of $i$ contrary to our hypothesis. 
+
+If there exists rational numbers $a, b$ such that $a^2 = 3$ and $b^2 = 4$ then $a^2 \cdot b^2 = 12$ there exists a rational number whose square is 12 (namely $a \cdot b$). From the comments above we need to show that either $a$ is irrational or $b$ is irrational and the other term is rational. If we let $b = 2$ then $b^2 = 4$ so we have the one rational number. If we now show that there is no rational number $a$ such that $a^2 = 3$ then we have shown that 12 is irrational.
+
+We let $\frac{m}{n} \in \mathbb{Q}$ and   $(\frac{m}{n})^2 = 3$ so $m^2 = 3 \cdot n^2$ and assume that there are no common factors between $m$ and $n$. This implies that $3|m^2$. Logically $m$ can only be $3\cdot c, \; 3 \cdot c + 1$, or $3 \cdot c + 2$ for $c \in \mathbb{N}$. Since neither $(3 \cdot c + 1)^2$ or $(3 \cdot c + 2)^2$ is a square we can only have $m = 3 \cdot c$. In other words $3|m^2 \implies 3|m$. If we let $m = 3 \cdot d$ then $(3 \cdot d)^2 = 3 \cdot n^2 \implies 9 \cdot d^2 = 3 \cdot n^2 \implies 3 \cdot d^2 = n^2$ so we have $3|n^2$ which implies that $3|n$ by our previous comments. We have shown $3|m$ and $3|n$ which implies $m$ and $n$ share a common factor contrary to our hypothesis.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 2\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+From the definition of an ordered field we have that if $x > 0$ and $y \le 0$ then $x y \le 0$. If $y = \frac{1}{x}$ then $1 = x(\frac{1}{x}) \le 0$ which is a contradiction so we must have $\frac{1}{x}>0$ if $x>0$.
+
+Now, if u = sup A and $\frac{1}{n} > 0$ then $u - \frac{1}{n} < u$ by the first ordered field axiom. From the definition of least upper bound we know that if $\alpha < \gamma$ and $\gamma =  $ sup A then $\alpha$ is not a least upper bound, thus $u - \frac{1}{n}$ is not a least upper bound. Also, since $u$ = sup A we know from the definition of the supremum that $x < u$ for all $x \in A$. Again from the order axioms we have $u < u + \frac{1}{n}$ so  $x < u < u + \frac{1}{n}$ for all $x \in A$ and $u + \frac{1}{n}$ is an upper bound.
+
+
+\newpage
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 3\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+Let $a$ be an upper bound of A and $b$ be an upper bound of B. If we choose $c$ = max\{$a$,$b$\} then $a \le c$ and $b \le c$. By the definition of upper bounds $x \le a \le c$ for $x \in$ A and $y \le b \le c$ for $y \in$ B so $z \le c$ for $z \in$ A or B which is to say $z \le c$ for $z \in$ A $\cup$ B. This means A $\cup$ B is bounded above. The proof that \\ A $\cup$ B is bounded below is virtually identical therefore A $\cup$ B is bounded.
+
+Because A and B are bounded and therefore both have least upper bounds the previous argument also shows that since sup A and sup B are bounds then max\{sup A,sup B\} is also a bound of A $\cup$ B. Now we need to show that it is a least upper bound.
+
+Without loss of generality we will assume that max\{sup A,sup B\} = sup B. So if \\$\gamma < $ max\{sup A,sup B\} then $\gamma < $ sup B. So we have by the definition of supremum an $\alpha$ such that
+$\gamma < \alpha \le sup B$ such that $\alpha \in$ B which means $\alpha \in$ A $\cup$ B. Then we have $\gamma < $ max\{sup A,sup B\} $\implies$ $\gamma < \alpha \in$ A $\cup$ B i.e. $\gamma$ is not an upper bound so max\{sup A,sup B\} is the \textit{least} upper bound. Therefore
+\[
+\text{sup A $\cup$ B = max\{sup A, sup B\}}
+\]
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 4\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 5\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+If we assume that we can define an order on $\mathbb{C}$ then we can use the order axioms to show as in proposition 1.18(d) that $x^2 > 0$ for $x \neq 0$. This implies that $1 > 0$ so $0 = -1 + 1 > -1 + 0 = -1 \implies -1 < 0$.
+
+If we let $z = i = (0,1)$ then we see from the definition of multiplication in $\mathbb{C}$ that $z^2 = (0,1)\cdot(0,1) = (-1,0) = -1$. By the previous paragraph $z^2 > 0$ if we assume that we can define order but since $z^2 = -1 < 0$ we have a contradiction so our assumption that we can define an order on $\mathbb{C}$ is mistaken.
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 6\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+%We need to show that $\mathbb{C}$ has the 2 properties of an ordered set with the defined dictionary order. We let $x = a + bi$,$y = c + di$ and $z = e + fi$ and $y < z$. This means either $c < e$ or $c = e$ and $d < f$. Now $x + y = a + c + (b + d)i$ if $c < e$ then $a + c < a + e$ since $\mathbb{R}$ is an ordered set. Then by the definition of order on $\mathbb{C}$ we have $a + c + (b + d)i < a + e + (b + d)i$ but then also $a + c + (b + d)i < a + e + (b + f)i$ since the imaginary component is immaterial to order when the one of the real components is larger. Therefore $x + y = a + c + (b + d)i < a + e + (b + f)i = x + z$
+
+We need to first demonstrate the trichotomy that either $x < y, x = y,$ or $x > y$. First either $x = y$ or $x \neq y$. If $x = y$ then we have satisfied one of the three cases, we need to consider when this is not the case.
+
+Let $x = a + bi$ and $y = c + di$, if $x \neq y$ then either $a \neq c$ or $b \neq d$ or both. Suppose that $a \neq b$ then either $a > c$ or $a < c$ since $\mathbb{R}$ is an ordered set. This means, however that either $x > y$ or $x < y$ by the definition of dictionary order. Now suppose that $a = c$ then since $x \neq y$ we must have either $b < d$ or $d > b$ and since again $b, d \in \mathbb{R}$, thus have again $x > y$ or $x < y$. We have shown that in all cases when $x \neq y$ we have either $x < y$ or $x > y$ other wise $x = y$.
+
+%We start by defining $z = e + fi$. When $x < y$ and $y < z$ suppose that $x \ge z$. First we consider the case for when $x=z$ which imply that either $a=e$ and $b=f$. However since $x<y$ and $y<z$ then $x \neq y$ and $y \neq z$ so $x \neq z$ which is a contradiction so we can not have $x = z$
+
+The proof the $x < y$ and $y < z \implies x < z$ is trivial. It can be accomplished by considering the 4 cases that arise when doing the calculation. Case 1, the real part in x and y and the real part different in y and z. Case 2, the real part is different in $x$ and $y$ and but only the imaginary part is different in $y$ and $z$. Case 3, only the imaginary part is different in $x$ and $y$ but the real part is different in $y$ and $z$ and Case 4, where only the imaginary part is different in $x$ and $y$ and only different in $y$ and $z$. Simple calculation shows that $x < z$ in all cases. So $\mathbb{C}$ is an ordered set. 
+
+
+Let E = \{$z \in \mathbb{C} | z = a + bi \; \text{where} \; a \in (0,1), \; b \in (0,1) $\}. For $w = 1 + i$ it is clear that $z \le w$ for \\$\forall z \in$ E. That is, $w$ is an upper bound. By the definition of order no $z \in \mathbb{C}$ with $c < 1$ when $z = c + di$ will be an upper bound. Suppose however that $c = 1$ and $d < 1$. In this case $z \le w$ yet there is no element $u \in$ E such that $z < u$, that is $z$ is also an upper bound. It is clear from the argument that when \\Re $z = 1$, $z$ is an upper bound regardless of the value of Im $z \in \mathbb{R}$ . Since $\mathbb{R}$ is unbounded it follows that there is no \textit{least} upper for this set.
+
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.100B} - Problem 7\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+We proceed using the dot product as an expression of the definition of the norm:
+\begin{eqnarray*}
+ |\textbf{x} + \textbf{y}|^2 + |\textbf{x} - \textbf{y}|^2 & = & (\textbf{x} + \textbf{y}) \cdot (\textbf{x} + \textbf{y})  +  (\textbf{x} - \textbf{y}) \cdot (\textbf{x} - \textbf{y})    \\
+   &=& \textbf{x}\cdot \textbf{x} + 2 \, \textbf{x}\cdot \textbf{y} + \textbf{y}\cdot \textbf{y} + \textbf{x}\cdot \textbf{x} - 2 \, \textbf{x}\cdot \textbf{y} + \textbf{y}\cdot \textbf{y}  \\
+   &=& 2\, \textbf{x}\cdot \textbf{x} + 2\, \textbf{y}\cdot \textbf{y} \\
+   &=& 2\,|\textbf{x}|^2 + 2\,|\textbf{y}|^2
+\end{eqnarray*}
+
+The geometric interpretation of this formula is to note that $\textbf{x} + \textbf{y}$ represents one diagonal and $\textbf{x} - \textbf{y}$ represents the other diagonal. The formula then says that the sum of the squares of the lengths of the diagonals is equal to the sum of the squares of the four sides of the parallelogram.
+
+%\begin{eqnarry)
+%|x + y|^2 + |x - y|^2 & = & (\textbf{x} + \textbf{y}) \centerdot (\textbf{x} + \textbf{y}) \\
+%a & = & b \\
+%b & = & c
+%\end{eqnarry}
+
+
+%\vspace{15pt}
+%\begin{flushleft} 
+%\textbf{Class 18.100B} - Extra Problem 1\\
+%\rule{500pt}{1pt}\\
+%\end{flushleft} 
+
+%\vspace{15pt}
+%\begin{flushleft} 
+%\textbf{Class 18.100B} - Extra Problem 2\\
+%\rule{500pt}{1pt}\\
+%\end{flushleft} 
+
+\end{document}  
